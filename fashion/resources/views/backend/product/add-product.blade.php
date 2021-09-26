@@ -9,45 +9,56 @@
                 <li class="breadcrumb-item"><a href="index.html">Sản phẩm</a></li>
                 <li class="breadcrumb-item active">Thêm mới sản phẩm</li>
             </ol>
-            <div class="container">
+            <form method="POST" enctype="multipart/form-data" action="/admin/product/add">
+                @csrf
+                <div class="container">
                 <div class="row">
                   <div class="col-md-8">
                     <div class="form-group">
                         <label>Danh mục</label>
-                        <select name="category" class="form-control">
+                        <select name="category_id" class="form-control">
                             <option value='1' selected>Nam</option>
                             <option value='3'>---|Áo khoác nam</option>
                             <option value='2'>Nữ</option>
                             <option value='4'>---|Áo khoác nữ</option>
                         </select>
+                        {{showErrors($errors,'category_id')}}
                     </div>
                     <div class="form-group">
                         <label>Mã sản phẩm</label>
                         <input type="text" name="code" class="form-control">
-                        {{-- gọi hàm showerros --}}
+                        {{showErrors($errors,'code')}}
                     </div>
                     <div class="form-group">
                         <label>Tên sản phẩm</label>
                         <input type="text" name="name" class="form-control">
-                        {{-- {{showErrors($errors,'name')}} --}}
+                        {{showErrors($errors,'name')}}
+                    </div>
+                    <div class="form-group">
+                        <label>Số lượng</label>
+                        <input type="number" name="quantity" class="form-control">
+                        {{showErrors($errors,'number')}}
                     </div>
                     <div class="form-group">
                         <label>Giá sản phẩm (Giá chung)</label>
                         <input type="number" name="price" class="form-control">
+                        {{showErrors($errors,'number')}}
                     </div>
                     <div class="form-group">
                         <label>Sản phẩm có nổi bật</label>
-                        <select name="featured" class="form-control">
+                        <select name="is_hightlight" class="form-control">
                             <option value="0">Không</option>
                             <option value="1">Có</option>
                         </select>
+                        {{showErrors($errors,'is_hightlight')}}
                     </div>
                     <div class="form-group">
                         <label>Trạng thái</label>
-                        <select name="state" class="form-control">
+                        <select name="status" class="form-control">
                             <option value="1">Còn hàng</option>
                             <option value="0">Hết hàng</option>
                         </select>
+                        {{showErrors($errors,'status')}}
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -56,20 +67,23 @@
                         {{-- <input id="img" type="file" name="img" class="form-control hidden"
                             onchange="changeImg(this)">
                         <img id="avatar" class="thumbnail" width="100%" height="350px" src=""> --}}
-                        <input accept="image/*" type='file' id="imgInp" class="form-control hidden"/>
-                        <img id="blah" width="100%" height="350px" src="/image/image-default.png"/>
+                        <input name="image" accept="image/*" type='file' id="imgInp" class="form-control hidden"/>
+                        <img id="blah" width="100%" height="350px" src="/backend/image/image-default.png"/>
+                        {{showErrors($errors,'image')}}
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Thông tin</label>
                         <textarea name="info" style="width: 100%;height: 100px;"></textarea>
+                        {{showErrors($errors,'info')}}
                     </div>
                  </div>
                  <div class="col-md-12">
                     <div class="form-group">
                         <label>Miêu tả</label>
                         <textarea id="editor" name="describe" style="width: 100%;height: 100px;"></textarea>
+                        {{showErrors($errors,'describe')}}
                     </div>
                  </div>
                  <div class="col-md-12">

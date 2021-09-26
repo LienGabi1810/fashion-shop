@@ -68,15 +68,18 @@ Route::get('/admin',[AdminController::class, 'getIndex']);
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'category'], function () {
         Route::get('',  [CategoryController::class, 'getCategory']); 
-    
+        Route::post('',  [CategoryController::class, 'postCategory']); 
+        
     });
-
 
     //product
     Route::group(['prefix' => 'product'], function () {
         Route::get('',  [AdminProductController::class, 'getProduct']); 
         Route::get('add',  [AdminProductController::class, 'getAddProduct']); 
-        Route::get('edit',  [AdminProductController::class, 'getEditProduct']); 
+        Route::post('add',  [AdminProductController::class, 'postProduct']); 
+        Route::get('edit/{id}',  [AdminProductController::class, 'getEditProduct']); 
+        Route::post('edit/{id}',  [AdminProductController::class, 'postEditProduct']); 
+        Route::get('delete/{id}',  [AdminProductController::class, 'deleteProduct']); 
     });
 
     //cart
@@ -90,6 +93,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'user'], function () {
         Route::get('',  [AdminUserController::class, 'getUser']); 
         Route::get('add',  [AdminUserController::class, 'getAddUser']);
+        Route::post('add',  [AdminUserController::class, 'postAddUser']);
+        Route::get('edit/{id}',  [AdminUserController::class, 'getEditUser']);
+        Route::post('edit/{id}',  [AdminUserController::class, 'postEditUser']);
+        Route::get('delete/{id}',  [AdminUserController::class, 'deleteUser']);
     
     });
 

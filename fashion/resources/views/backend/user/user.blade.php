@@ -5,6 +5,11 @@
     <main>
         <div class="container-fluid px-4">
             <h1 class="mt-4">Tài khoản</h1>
+            @if (!empty(session('thongbao')))
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">{{session('thongbao')}}</h4>
+                </div>
+            @endif
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="index.html">Tài khoản</a></li>
                 <li class="breadcrumb-item active">Danh sách tài khoản</li>
@@ -36,42 +41,29 @@
                             </tr>
                         </tfoot>
                         <tbody>
+                            @foreach ($users as $user)
                             <tr>
-                                <td>Phan văn tuấn</td>
-                                <td>0942379525</td>
-                                <td>trâu quỳ, gia lâm</td>
-                                <td>nam</td>
-                                <td>tuanphan7396@gmail.com</td>
-                                <td>admin</td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->phone}}</td>
+                                <td>{{$user->address}}</td>
+                                <td>@if($user->gender == 1)
+                                    Nam
+                                    @elseif($user->gender == 0)
+                                    Nữ
+                                    @endif</td>
+                                <td>{{$user->email}}</td>
+                                <td>@if($user->role == 1)
+                                    Admin
+                                    @elseif($user->role == 0)
+                                    Manager
+                                    @endif
+                                </td>
                                 <td>
-                                    <a href=""><i class="fas fa-edit"></i></a>
-                                    <a href=""><i class="fas fa-trash"></i></a>
+                                    <a href="/admin/user/edit/{{$user->id}}"><i class="fas fa-edit"></i></a>
+                                    <a href="/admin/user/delete/{{$user->id}}"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Phan văn tuấn</td>
-                                <td>0942379525</td>
-                                <td>trâu quỳ, gia lâm</td>
-                                <td>nam</td>
-                                <td>tuanphan7396@gmail.com</td>
-                                <td>admin</td>
-                                <td>
-                                    <a href=""><i class="fas fa-edit"></i></a>
-                                    <a href=""><i class="fas fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Phan văn tuấn</td>
-                                <td>0942379525</td>
-                                <td>trâu quỳ, gia lâm</td>
-                                <td>nam</td>
-                                <td>tuanphan7396@gmail.com</td>
-                                <td>admin</td>
-                                <td>
-                                    <a href=""><i class="fas fa-edit"></i></a>
-                                    <a href=""><i class="fas fa-trash"></i></a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

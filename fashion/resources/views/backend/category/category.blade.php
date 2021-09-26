@@ -10,6 +10,11 @@
                 <li class="breadcrumb-item"><a href="index.html">Lien Fashion</a></li>
                 <li class="breadcrumb-item active">Category</li>
             </ol>
+            @if (session('thongbao'))
+            <div class="alert bg-success" role="alert">
+                {{session('thongbao')}} <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+            @endif
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
@@ -21,76 +26,28 @@
                             @csrf
                         <div>
                             <div style="margin-bottom: 20px" class="form-group">
-                                <label style="margin-bottom: 10px" for="">Danh mục cha:</label>
-                                <select class="form-control" name="parent" id="">
-                                    <option>----ROOT----</option>
-                                    <option>Nam</option>
-                                    <option>---|Áo khoác nam</option>
-                                    <option>---|---|Áo khoác nam</option>
-                                    <option>Nữ</option>
-                                    <option>---|Áo khoác nữ</option>
+                                <label for="">Danh mục cha:</label>
+                                <select class="form-control" name="parent_id" id="">
+                                    <option value="0">----ROOT----</option>
+                                    {{getCategory($category,0,'',0)}}
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label style="padding-bottom: 20px" for="">Tên Danh mục</label>
                                 <input type="text" class="form-control" name="name" id="" placeholder="Tên danh mục mới">
-                                {{-- {{showErrors($errors,'name')}} --}}
-                                {{-- <div class="alert bg-danger" role="alert">
-                                    <svg class="glyph stroked cancel">
-                                        <use xlink:href="#stroked-cancel"></use>
-                                    </svg>Tên danh mục đã tồn tại!<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-                                </div> --}}
+                                {{showErrors($errors,'name')}}
                             </div>
                             <button style="margin-top: 20px" type="submit" class="btn btn-primary">Thêm danh mục</button>
                         </div>
                         </form>
                     </div>
-                    <div class="col-md-7" style="padding-left: 150px">
-                        <div>
-                            {{-- <div class="alert bg-success" role="alert">
-                                <svg class="glyph stroked checkmark">
-                                    <use xlink:href="#stroked-checkmark"></use>
-                                </svg> Đã thêm danh mục thành công! <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-                            </div> --}}
-                            <h3 style="margin: 0;"><strong>Phân cấp Menu</strong></h3>
-                            <div class="vertical-menu">
-                                <div class="item-menu active">Danh mục </div>
-                                <div class="item-menu"><span>Nam</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
-        
-                                    </div>
-                                </div>
-                                <div class="item-menu"><span>---|Áo khoác Nam</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
-        
-                                    </div>
-                                </div>
-                                <div class="item-menu"><span>---|---|Áo khoác Nam (Dành cho việc mở rộng)</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
-        
-                                    </div>
-                                </div>
-                                <div class="item-menu"><span>Nữ</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
-        
-                                    </div>
-                                </div>
-                                <div class="item-menu"><span>---|Áo khoác Nữ</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
-        
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col-md-7">
+
+
+                        <h3 style="margin: 0;"><strong>Phân cấp Menu</strong></h3>
+                        <div class="vertical-menu">
+                            <div class="item-menu active">Danh mục </div>
+                            {{showCategory($category,0,'')}}
                         </div>
                     </div>
                 </div>
@@ -111,4 +68,12 @@
     </footer>
 </div>
 
+@endsection
+@section('script')
+    @parent
+    <script>
+        function del(){
+            return confirm('Bạn có muốn xóa danh mục này?')
+        }
+    </script>
 @endsection
