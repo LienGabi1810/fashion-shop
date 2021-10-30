@@ -16,11 +16,18 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         return $this->model->select('name')->take(5)->get();
     }
 
+    public function getAllParentCategory()
+    {
+        return $this->model->where('parent_id','like', '0')->get();
+    }
+
     public function postCategory($id, $r)
     {
         $category = array(
             'name' => $r->name,
             'parent_id' => $r->parent_id,
+            'tag' => 'nu'
+            // 'tag' => strtolower(str_replace(" ","-",$r->name))
         );
         if(!$r->id){
             return $this->model->create($category);

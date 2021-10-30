@@ -24,7 +24,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             'phone' => $r->phone,
             'address' => $r->address,
             'email' => $r->email,
-            'password' => $r->password,
+            'password' => bcrypt($r->password),
             'gender' => $r->gender,
             'role' => $r->role
         );

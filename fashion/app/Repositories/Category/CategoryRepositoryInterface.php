@@ -8,5 +8,7 @@ interface CategoryRepositoryInterface extends RepositoryInterface
     //ví dụ: lấy 5 sản phầm đầu tiên
     public function getCategory();
 
+    public function getAllParentCategory();
+
     public function postCategory($id, $arr);
 }
