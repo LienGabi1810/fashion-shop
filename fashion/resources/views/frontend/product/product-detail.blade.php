@@ -12,12 +12,12 @@
 			</a>
 
 			<a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
-				Men
+				{{$product->category_id}}
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
 
 			<span class="stext-109 cl4">
-				Lightweight Jacket
+				{{$product->name}}
 			</span>
 		</div>
 	</div>
@@ -32,21 +32,20 @@
 						<div class="wrap-slick3 flex-sb flex-w">
 							<div class="wrap-slick3-dots"></div>
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
 							<div class="slick3 gallery-lb">
-								<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+								<div class="item-slick3" data-thumb="/uploads/products/{{ $imagesProduct->images1}}">
 									<div class="wrap-pic-w pos-relative">
-										<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+										<img src="/uploads/products/{{ $imagesProduct->images1 }}" alt="IMG-PRODUCT">
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
 								</div>
-
-								<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
+								
+								<div class="item-slick3" data-thumb="/uploads/products/{{ $imagesProduct->images2 }}">
 									<div class="wrap-pic-w pos-relative">
-										<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
+										<img src="/uploads/products/{{ $imagesProduct->images2 }}" alt="IMG-PRODUCT">
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
 											<i class="fa fa-expand"></i>
@@ -54,9 +53,9 @@
 									</div>
 								</div>
 
-								<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
+								<div class="item-slick3" data-thumb="/uploads/products/{{ $imagesProduct->images3 }}">
 									<div class="wrap-pic-w pos-relative">
-										<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
+										<img src="/uploads/products/{{ $imagesProduct->images3 }}" alt="IMG-PRODUCT">
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
 											<i class="fa fa-expand"></i>
@@ -71,15 +70,15 @@
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-							Lightweight Jacket
+							{{ $product->name }}
 						</h4>
 
 						<span class="mtext-106 cl2">
-							$58.79
+							${{number_format($product->price, 0,'', ',')}}
 						</span>
 
 						<p class="stext-102 cl3 p-t-23">
-							Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+							{{ $product->info }}
 						</p>
 						
 						<!--  -->
@@ -143,26 +142,6 @@
 							</div>	
 						</div>
 
-						<!--  -->
-						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-							<div class="flex-m bor9 p-r-10 m-r-11">
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-									<i class="zmdi zmdi-favorite"></i>
-								</a>
-							</div>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-								<i class="fa fa-facebook"></i>
-							</a>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-								<i class="fa fa-twitter"></i>
-							</a>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-								<i class="fa fa-google-plus"></i>
-							</a>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -173,15 +152,15 @@
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="nav-item p-b-10">
-							<a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
+							<a class="nav-link active" data-toggle="tab" href="#description" role="tab">Mô tả</a>
 						</li>
 
 						<li class="nav-item p-b-10">
-							<a class="nav-link" data-toggle="tab" href="#information" role="tab">Additional information</a>
+							<a class="nav-link" data-toggle="tab" href="#information" role="tab">Thông tin</a>
 						</li>
 
 						<li class="nav-item p-b-10">
-							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
+							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Nhận xét (1)</a>
 						</li>
 					</ul>
 
@@ -191,7 +170,7 @@
 						<div class="tab-pane fade show active" id="description" role="tabpanel">
 							<div class="how-pos2 p-lr-15-md">
 								<p class="stext-102 cl6">
-									Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus et elementum sed, sodales vitae eros. Ut ex quam, porta consequat interdum in, faucibus eu velit. Quisque rhoncus ex ac libero varius molestie. Aenean tempor sit amet orci nec iaculis. Cras sit amet nulla libero. Curabitur dignissim, nunc nec laoreet consequat, purus nunc porta lacus, vel efficitur tellus augue in ipsum. Cras in arcu sed metus rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
+									{{ $product->describe }}
 								</p>
 							</div>
 						</div>
@@ -344,18 +323,18 @@
 
 		<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
 			<span class="stext-107 cl6 p-lr-25">
-				SKU: JAK-01
+				Mã sẩn phẩm: {{$product->code}}
 			</span>
 
 			<span class="stext-107 cl6 p-lr-25">
-				Categories: Jacket, Men
+				Danh mục: {{$product->category_id}}
 			</span>
 		</div>
 	</section>
 
 
 	<!-- Related Products -->
-	<section class="sec-relate-product bg0 p-t-45 p-b-105">
+	{{-- <section class="sec-relate-product bg0 p-t-45 p-b-105">
 		<div class="container">
 			<div class="p-b-45">
 				<h3 class="ltext-106 cl5 txt-center">
@@ -624,7 +603,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> --}}
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">

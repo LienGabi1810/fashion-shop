@@ -17,6 +17,22 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         return $this->model->select('name')->take(5)->get();
     }
 
+    public function getHotProduct()
+    {
+        return $this->model->where('is_hightlight','like','1')->take(8)->get();
+    }
+
+    public function geDetailProduct($id)
+    {
+        return $product = $this->model->find($id);
+    }
+
+
+    public function getNewProduct()
+    {
+        return $this->model->orderBy('id','DESC')->take(8)->get();
+    }
+
     public function postProduct($id, $r)
     {
         $product = $this->model->find($id);
@@ -38,6 +54,11 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             'is_hightlight' => $r->is_hightlight,
             'category_id' => $r->category_id,
             'info' => $r->info,
+            'weight' =>  '1',
+            'imensions' =>  '1',
+            'materials' =>  '1',
+            'color' =>  '1',
+            'sizes' => '1',
             'describe' => $r->describe
         );
         

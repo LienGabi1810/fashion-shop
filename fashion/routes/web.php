@@ -10,6 +10,7 @@ use App\Http\Controllers\backend\AdminController;
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\AdminProductController;
 use App\Http\Controllers\backend\AdminUserController;
+use App\Http\Controllers\backend\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,7 @@ Route::get('/about',[IndexController::class, 'getAbout']);
 //product
 Route::group(['prefix' => 'product'], function () {
     Route::get('', [ProductController::class, 'getProduct']);
-    Route::get('detail',[ProductController::class, 'getProductDetail']);
+    Route::get('detail/{id}',[ProductController::class, 'getProductDetail']);
 });
 
 //cart
@@ -62,19 +63,25 @@ Route::group(['prefix' => 'checkout'], function () {
 
 //====BACKEND====
 
-Route::get('/admin',[AdminController::class, 'getIndex']);
+Route::get('/admin',[AdminController::class, 'getIndex'])->middleware('CheckLogin');
+
+//login
+
+Route::get('/login',[LoginController::class, 'getLogin'])->middleware('CheckLogout');
+Route::post('/login',[LoginController::class, 'postLogin']);
+Route::get('/logout',[LoginController::class, 'getLogout']);
 
 //category
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'category'], function () {
-        Route::get('',  [CategoryController::class, 'getCategory']); 
-        Route::post('',  [CategoryController::class, 'postCategory']); 
+        Route::get('',  [CategoryController::class, 'getCategory'])->middleware('auth');
+        Route::post('',  [CategoryController::class, 'postCategory'])->middleware('CheckLogin'); 
         
     });
 
     //product
     Route::group(['prefix' => 'product'], function () {
-        Route::get('',  [AdminProductController::class, 'getProduct']); 
+        Route::get('',  [AdminProductController::class, 'getProduct'])->middleware('CheckLogout'); 
         Route::get('add',  [AdminProductController::class, 'getAddProduct']); 
         Route::post('add',  [AdminProductController::class, 'postProduct']); 
         Route::get('edit/{id}',  [AdminProductController::class, 'getEditProduct']); 

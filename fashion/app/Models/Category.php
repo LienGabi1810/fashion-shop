@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $table="category";
-    protected $fillable = ['name','parent_id'];
+    protected $fillable = ['name','parent_id','tag'];
     public $timestamps = false;
 
     public function product()

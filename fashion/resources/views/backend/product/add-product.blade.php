@@ -72,11 +72,19 @@
                         {{showErrors($errors,'image')}}
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <div class="form-group">
                         <label>Thông tin</label>
                         <textarea name="info" style="width: 100%;height: 100px;"></textarea>
                         {{showErrors($errors,'info')}}
+                    </div>
+                 </div>
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Ảnh chi tiết sản phẩm</label>
+                        <input name="image1" accept="image/*" type='file' id="imgInp1" class="form-control hidden"/>
+                        <input name="image2" accept="image/*" type='file' id="imgInp2" class="form-control hidden"/>
+                        <input name="image3" accept="image/*" type='file' id="imgInp3" class="form-control hidden"/>
                     </div>
                  </div>
                  <div class="col-md-12">
@@ -109,6 +117,15 @@
     if (file) {
         blah.src = URL.createObjectURL(file)
     }
+    }
+    imgInp1.onchange = evt => {
+    const [file1] = imgInp1.files
+    }
+    imgInp2.onchange = evt => {
+    const [file2] = imgInp2.files
+    }
+    imgInp3.onchange = evt => {
+    const [file3] = imgInp3.files
     }
     </script>
 @endsection
