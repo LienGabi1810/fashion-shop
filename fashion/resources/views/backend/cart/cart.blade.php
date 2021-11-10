@@ -20,11 +20,10 @@
                                 <th>Số điện thoại</th>
                                 <th>Địa chỉ</th>
                                 <th>Tên sản phẩm</th>
-                                <th>Số lượng</th>
                                 <th>Tổng tiền</th>
                                 <th>Tình trạng</th>
                                 <th>Ngày lên đơn</th>
-                                <th>Tùy chọn</th>
+                                <th>Vận chuyển</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -34,26 +33,31 @@
                                 <th>Số điện thoại</th>
                                 <th>Địa chỉ</th>
                                 <th>Tên sản phẩm</th>
-                                <th>Số lượng</th>
                                 <th>Tổng tiền</th>
                                 <th>Tình trạng</th>
                                 <th>Ngày lên đơn</th>
-                                <th>Tùy chọn</th>
+                                <th>Vận chuyển</th>
                             </tr>
                         </tfoot>
                         <tbody>
+                            @foreach ($order as $item)
                             <tr>
-                                <td>001</td>
-                                <td>Phan văn tuấn</td>
-                                <td>0942379525</td>
-                                <td>cầu giấy</td>
-                                <td>áo phông: 1</td>
-                                <td>100</td>
-                                <td>100000</td>
+                                <td>{{$item->id}}</td>
+                                <td>{{$item->name}}</td>
+                                <td>{{$item->phone}}</td>
+                                <td>{{$item->address}}</td>
+                                <td>{{$item->info}}</td>
+                                <td>{{$item->total}}</td>
                                 <td>đang giao</td>
-                                <td>14/2/1996</td>
-                                <th>Tùy chọn</th>
+                                <td>{{$item->created_at}}</td>
+                                <th>
+                                    <select>
+                                        <option value="bd">Bưu Điện</option>        
+                                        <option value="ship">Ship</option>        
+                                    </select>
+                                </th>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

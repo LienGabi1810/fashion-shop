@@ -31,55 +31,38 @@
 									<th class="column-3">Price</th>
 									<th class="column-4">Quantity</th>
 									<th class="column-5">Total</th>
+									<th class="column-6">Remove</th>
 								</tr>
-
+								@if($cart)
+								@foreach ($cart as $item)
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="images/item-cart-04.jpg" alt="IMG">
+											<img src="/uploads/products/{{ $item->options->img }}" alt="IMG">
 										</div>
 									</td>
-									<td class="column-2">Fresh Strawberries</td>
-									<td class="column-3">$ 36.00</td>
+									<td class="column-2">{{$item->name}}</td>
+									<td class="column-3">${{number_format($item->price, 0,'', ',')}}</td>
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m change-cart">
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
+											{{-- <input onChange="update_qty('{{$item->rowId}}',this.value,{{$item->id}})" min="1" type="number" id="quantity" name="quantity" class="form-control input-number text-center" value="{{$item->qty}}"> --}}
+											<input min="1" rowId="{{$item->rowId}}" data-id="{{$item->id}}" id="number-product" class="mtext-104 cl3 txt-center num-product num-cart" type="number" name="num-product1" value="{{$item->qty}}">
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m change-cart">
 												<i class="fs-16 zmdi zmdi-plus"></i>
 											</div>
 										</div>
 									</td>
-									<td class="column-5">$ 36.00</td>
+									<td class="column-5">$ {{number_format($item->options->totalPrd, 0,'', ',')}}</td>
+									<td class="column-6"><a onclick="return del_cart()" href="/cart/remove/{{$item->rowId}}" class="close" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</a></td>
 								</tr>
-
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="images/item-cart-05.jpg" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">Lightweight Jacket</td>
-									<td class="column-3">$ 16.00</td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product2" value="1">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-									</td>
-									<td class="column-5">$ 16.00</td>
-								</tr>
+								@endforeach
+								@endif
 							</table>
 						</div>
 
@@ -114,7 +97,7 @@
 
 							<div class="size-209">
 								<span class="mtext-110 cl2">
-									$79.65
+									{{Cart::priceTotal()}}
 								</span>
 							</div>
 						</div>
@@ -177,9 +160,8 @@
 							</div>
 						</div>
 
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-							Proceed to Checkout
-						</button>
+						<a href="/checkout" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+							Proceed to Checkout</a>
 					</div>
 				</div>
 			</div>
@@ -192,45 +174,43 @@
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
-
-<!--===============================================================================================-->	
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-	<script>
-		$(".js-select2").each(function(){
-			$(this).select2({
-				minimumResultsForSearch: 20,
-				dropdownParent: $(this).next('.dropDownSelect2')
-			});
-		})
-	</script>
-<!--===============================================================================================-->
-	<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-	<script>
-		$('.js-pscroll').each(function(){
-			$(this).css('position','relative');
-			$(this).css('overflow','hidden');
-			var ps = new PerfectScrollbar(this, {
-				wheelSpeed: 1,
-				scrollingThreshold: 1000,
-				wheelPropagation: false,
-			});
-
-			$(window).on('resize', function(){
-				ps.update();
-			})
-		});
-	</script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
-
 @endsection
 
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+		$( document ).ready(function() {
+			update_cart();
+		});
+
+		function del_cart(){
+			return confirm("bạn có muốn xóa sản phẩm này khỏi giỏ hàng không?")
+		}
+
+		function update_cart(){
+			$('.change-cart').on('click',function(){
+				var rowId =  $("input[name=num-product1]").attr('rowid');
+				var qty =  $(this).parent().find('#number-product').val();
+				var id =  $("input[name=num-product1]").attr('data-id');
+				update_qty(rowId,qty,id);
+			})
+		}
+
+		function update_qty(rowId,qty,id){
+			$.get("/cart/update/"+rowId+"/"+qty+"/"+id,
+				function(data)
+				{
+					if(data=='success'){
+						window.location.reload();
+					}
+					else if(data=='error'){
+						alert('vượt quá sản phẩm trong kho');
+						window.location.reload();
+					}
+					else
+					{
+						alert('Cập nhật thất bại!');
+					}
+				}
+			);
+		}
+    </script>

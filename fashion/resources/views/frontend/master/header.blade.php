@@ -53,7 +53,7 @@
 							</li>
 
 							<li class="label1" data-label1="hot">
-								<a href="/cart">Features</a>
+								<a href="/cart">Cart</a>
 							</li>
 
 							<li>

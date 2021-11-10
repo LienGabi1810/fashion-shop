@@ -11,6 +11,7 @@ use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\AdminProductController;
 use App\Http\Controllers\backend\AdminUserController;
 use App\Http\Controllers\backend\LoginController;
+use App\Http\Controllers\frontend\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,11 +39,15 @@ Route::get('/about',[IndexController::class, 'getAbout']);
 Route::group(['prefix' => 'product'], function () {
     Route::get('', [ProductController::class, 'getProduct']);
     Route::get('detail/{id}',[ProductController::class, 'getProductDetail']);
+    Route::get('checkqty/{id}/{qty}',[ProductController::class, 'checkQty']);
 });
 
 //cart
 Route::group(['prefix' => 'cart'], function () {
     Route::get('',  [CartController::class, 'getCart']);
+    Route::get('add',  [CartController::class, 'getAddCart']);
+    Route::get('remove/{id}',  [CartController::class, 'removeCart']);
+    Route::get('update/{rowId}/{qty}/{id}',  [CartController::class, 'updateCart']);
 
 });
 
@@ -55,9 +60,8 @@ Route::group(['prefix' => 'blog'], function () {
 
 //checkout
 Route::group(['prefix' => 'checkout'], function () {
-    Route::get('','frontend\CheckoutController@getCheckout');
-    Route::get('complete','frontend\CheckoutController@getComplete');
-    Route::post('','frontend\CheckoutController@postCheckout');
+    Route::get('',[CheckoutController::class, 'getCheckout']); 
+    Route::post('',[CheckoutController::class, 'getPost']);
 });
 
 
