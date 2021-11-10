@@ -45,4 +45,15 @@ class ProductController extends Controller
         $imagesProduct = ImagesProduct::all()->where('product_id',$id)->first();
         return view('/frontend/product/product-detail',['product' =>$product],['imagesProduct' => $imagesProduct]);
     }
+
+    public function checkQty($id,$qty){
+        $product = Product::find($id);
+        if($qty > $product->quantity){
+            return 'error';
+        }
+        else{
+            return 'success';
+        }
+    }
+
 }
