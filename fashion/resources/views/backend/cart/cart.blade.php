@@ -9,7 +9,7 @@
                 <li class="breadcrumb-item"><a href="index.html">Đơn hàng</a></li>
                 <li class="breadcrumb-item active">Danh sách đơn hàng</li>
             </ol>
-            <a href="/admin/cart/add" style="margin-bottom: 20px" type="button" class="btn btn-primary">Lên đơn</a>
+            {{-- <a href="/admin/cart/add" style="margin-bottom: 20px" type="button" class="btn btn-primary">Lên đơn</a> --}}
             <div class="card mb-4">
                 <div class="card-body">
                     <table id="datatablesSimple">
@@ -48,12 +48,19 @@
                                 <td>{{$item->address}}</td>
                                 <td>{{$item->info}}</td>
                                 <td>{{$item->total}}</td>
-                                <td>đang giao</td>
+                                <td>
+                                    <select>
+                                        <option value="0" @if($item->ship==0)selected @endif>Đang chờ</option>    
+                                        <option value="1" @if($item->ship==1)selected @endif>Đang giao</option>    
+                                        <option value="2" @if($item->ship==2)selected @endif>Thành công</option>    
+                                        <option value="3" @if($item->ship==3)selected @endif>Thất bại</option>    
+                                    </select>
+                                </td>
                                 <td>{{$item->created_at}}</td>
                                 <th>
                                     <select>
-                                        <option value="bd">Bưu Điện</option>        
-                                        <option value="ship">Ship</option>        
+                                        <option value="0" @if($item->ship==0)selected @endif>Bưu Điện</option>        
+                                        <option value="1" @if($item->ship==0)selected @endif>Ship</option>        
                                     </select>
                                 </th>
                             </tr>

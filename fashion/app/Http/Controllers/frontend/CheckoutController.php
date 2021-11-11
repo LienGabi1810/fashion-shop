@@ -44,7 +44,7 @@ class CheckoutController extends Controller
         $order->COD = $cod;
         $info = '';
         foreach(Cart::content() as $row){
-            $info = $info.$row->qty.' '.$row->name.': '.($row->qty*$row->price).'<br/>';
+            $info = $info.$row->qty.' '.$row->name.': '.($row->qty*$row->price).'|';
         }
         $order->info =  $info;
         $order->status_order = 0;

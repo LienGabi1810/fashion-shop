@@ -44,14 +44,14 @@
 									<td class="column-2">{{$item->name}}</td>
 									<td class="column-3">${{number_format($item->price, 0,'', ',')}}</td>
 									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
+										<div class="wrap-num-product flex-w m-l-auto m-r-0 update-cart">
 											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m change-cart">
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 											{{-- <input onChange="update_qty('{{$item->rowId}}',this.value,{{$item->id}})" min="1" type="number" id="quantity" name="quantity" class="form-control input-number text-center" value="{{$item->qty}}"> --}}
 											<input min="1" rowId="{{$item->rowId}}" data-id="{{$item->id}}" id="number-product" class="mtext-104 cl3 txt-center num-product num-cart" type="number" name="num-product1" value="{{$item->qty}}">
 
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m change-cart">
+											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m change-cart" id="123">
 												<i class="fs-16 zmdi zmdi-plus"></i>
 											</div>
 										</div>
@@ -168,12 +168,6 @@
 		</div>
 	</form>
 
-	<!-- Back to top -->
-	<div class="btn-back-to-top" id="myBtn">
-		<span class="symbol-btn-back-to-top">
-			<i class="zmdi zmdi-chevron-up"></i>
-		</span>
-	</div>
 @endsection
 
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -188,9 +182,12 @@
 
 		function update_cart(){
 			$('.change-cart').on('click',function(){
-				var rowId =  $("input[name=num-product1]").attr('rowid');
+				var rowId =  $(this).parent().find('#number-product').attr('rowid');
 				var qty =  $(this).parent().find('#number-product').val();
-				var id =  $("input[name=num-product1]").attr('data-id');
+				var id =  $(this).parent().find('#number-product').attr('data-id');
+				console.log(rowId);
+				console.log(qty);
+				console.log(id);
 				update_qty(rowId,qty,id);
 			})
 		}
