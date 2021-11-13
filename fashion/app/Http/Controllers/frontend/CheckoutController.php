@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\Product;
 use Cart;
 
 class CheckoutController extends Controller
@@ -52,12 +53,12 @@ class CheckoutController extends Controller
         $order->ship = '0';
         $order->save();
 
-        // $array = json_decode(json_encode(Cart::content()), True);
-        // foreach($array as $value){
-        //     $product = Product::find($value['id']);
-        //     $product->quantity = ($product->quantity) - ($value['qty']);
-        //     $product->save();
-        // }
+        $array = json_decode(json_encode(Cart::content()), True);
+        foreach($array as $value){
+            $product = Product::find($value['id']);
+            $product->quantity = ($product->quantity) - ($value['qty']);
+            $product->save();
+        }
 
         //     foreach(Cart::content() as $row){
         //         $order = new order;

@@ -7,7 +7,7 @@
             <h1 class="mt-4">Đơn hàng</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="index.html">Đơn hàng</a></li>
-                <li class="breadcrumb-item active">Danh sách đơn hàng</li>
+                <li class="breadcrumb-item active">Danh sách ship</li>
             </ol>
             {{-- <a href="/admin/cart/add" style="margin-bottom: 20px" type="button" class="btn btn-primary">Lên đơn</a> --}}
             <div class="card mb-4">
@@ -23,7 +23,7 @@
                                 <th>Tổng tiền</th>
                                 <th>Tình trạng</th>
                                 <th>Ngày lên đơn</th>
-                                <th>Vận chuyển</th>
+                                <th>Lựa chọn ship</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -36,7 +36,7 @@
                                 <th>Tổng tiền</th>
                                 <th>Tình trạng</th>
                                 <th>Ngày lên đơn</th>
-                                <th>Vận chuyển</th>
+                                <th>Lựa chọn ship</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -50,17 +50,19 @@
                                 <td>{{$item->total}}</td>
                                 <td>
                                     <select>
-                                        <option value="0" @if($item->status_order==0)selected @endif>Đang chờ</option>    
-                                        <option value="1" @if($item->status_order==1)selected @endif>Đang giao</option>    
-                                        <option value="2" @if($item->status_order==2)selected @endif>Thành công</option>    
-                                        <option value="3" @if($item->status_order==3)selected @endif>Thất bại</option>    
+                                        <option value="0" @if($item->ship==0)selected @endif>Đang chờ</option>    
+                                        <option value="1" @if($item->ship==1)selected @endif>Đang giao</option>    
+                                        <option value="2" @if($item->ship==2)selected @endif>Thành công</option>    
+                                        <option value="3" @if($item->ship==3)selected @endif>Thất bại</option>    
                                     </select>
                                 </td>
                                 <td>{{$item->created_at}}</td>
                                 <th>
-                                    <select class="change-to-ship" onchange="return changeToShip({{$item->id}})">
-                                        <option class="change-to-post-office" value="0" @if($item->ship==0)selected @endif>Bưu Điện</option>        
-                                        <option class="change-to-ship" value="1" @if($item->ship==1)selected @endif>Ship</option>        
+                                    <select>
+                                        <option value="0">Chon</option>
+                                        @foreach ($ship as $row)
+                                        <option value="{{$row->id}}" >{{$row->name}}</option>
+                                        @endforeach
                                     </select>
                                 </th>
                             </tr>
@@ -85,28 +87,3 @@
     </footer>
 </div>
 @endsection
-
-<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script>
-		function changeToShip($id)
-        {
-            $('.change-to-post-office').on('click',function(){
-                alert('222');
-            });
-            // $.get("admin/order/order-update-ship/"+id,
-            //     function(data)
-            //     {
-            //         if(data=='success'){
-            //             alert('Cập nhật thành công');
-            //             window.location.reload();
-            //         }
-            //         else
-            //         {
-            //             alert('Cập nhật thất bại!');
-            //         }
-            //     }
-            // );
-        }
-    </script>
-
-    

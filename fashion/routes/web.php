@@ -12,6 +12,7 @@ use App\Http\Controllers\backend\AdminProductController;
 use App\Http\Controllers\backend\AdminUserController;
 use App\Http\Controllers\backend\LoginController;
 use App\Http\Controllers\frontend\CheckoutController;
+use App\Http\Controllers\frontend\CustomerLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,16 @@ use App\Http\Controllers\frontend\CheckoutController;
 
 //index
 Route::get('/',[IndexController::class, 'getIndex']);
+
+//login
+Route::get('/customerlogin',[CustomerLoginController::class,'getLogin']);
+Route::post('/customerlogin',[CustomerLoginController::class,'postLogin']);
+Route::get('/customerlogout',[CustomerLoginController::class,'getCustomerLogout']);
+
+
+//register
+Route::get('/customerregister',[CustomerLoginController::class,'getRegister']);
+Route::post('/customerregister',[CustomerLoginController::class,'postRegister']);
 
 //contact
 Route::get('/contact',[IndexController::class, 'getContact']);
@@ -67,25 +78,28 @@ Route::group(['prefix' => 'checkout'], function () {
 
 //====BACKEND====
 
-Route::get('/admin',[AdminController::class, 'getIndex'])->middleware('CheckLogin');
+Route::get('/admin',[AdminController::class, 'getIndex']);
 
 //login
 
-Route::get('/login',[LoginController::class, 'getLogin'])->middleware('CheckLogout');
+Route::get('/login',[LoginController::class, 'getLogin']);
 Route::post('/login',[LoginController::class, 'postLogin']);
 Route::get('/logout',[LoginController::class, 'getLogout']);
 
 //category
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'category'], function () {
-        Route::get('',  [CategoryController::class, 'getCategory'])->middleware('auth');
-        Route::post('',  [CategoryController::class, 'postCategory'])->middleware('CheckLogin'); 
-        
+        Route::get('',  [CategoryController::class, 'getCategory']);
+        Route::post('',  [CategoryController::class, 'postCategory']); 
+        Route::get('category-edit/{id}',  [CategoryController::class, 'getEditCategory']); 
+        Route::post('category-edit',  [CategoryController::class, 'postEditCategory']); 
+        Route::get('category-delete/{id}',  [CategoryController::class, 'getDeleteCategory']);
+
     });
 
     //product
     Route::group(['prefix' => 'product'], function () {
-        Route::get('',  [AdminProductController::class, 'getProduct'])->middleware('CheckLogout'); 
+        Route::get('',  [AdminProductController::class, 'getProduct']); 
         Route::get('add',  [AdminProductController::class, 'getAddProduct']); 
         Route::post('add',  [AdminProductController::class, 'postProduct']); 
         Route::get('edit/{id}',  [AdminProductController::class, 'getEditProduct']); 
@@ -97,6 +111,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'cart'], function () {
         Route::get('',  [AdminCartController::class, 'getCart']); 
         Route::get('add',  [AdminCartController::class, 'getAddCart']);
+        Route::get('ship',  [AdminCartController::class, 'getCartShip']); 
     
     });
 

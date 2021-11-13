@@ -31,7 +31,7 @@ class ProductController extends Controller
     public function getProduct(){
         // $products = $this->productRepo->getAll();
         // dd($products);
-        $products = Product::all();
+        $products = Product::all()->where('quantity','>',0);
         $categories = $this->categoryRepo->getAllParentCategory();
         return view('/frontend/product/product',['products' =>$products],['categories' => $categories]);
     }

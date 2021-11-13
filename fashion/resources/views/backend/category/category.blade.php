@@ -75,5 +75,6 @@
         function del(){
             return confirm('Bạn có muốn xóa danh mục này?')
         }
+        
     </script>
 @endsection

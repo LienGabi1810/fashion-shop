@@ -37,7 +37,9 @@
                 <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                         <a class="nav-link" href="/admin/cart">Danh sách đơn hàng</a>
-                    
+                    </nav>
+                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                        <a class="nav-link" href="/admin/cart/ship">Danh sách đơn hàng ship</a>
                     </nav>
                 </div>
             </div>
