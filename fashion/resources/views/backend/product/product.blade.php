@@ -70,7 +70,7 @@
                                 </td>
                                 <td> 
                                     <a href="/admin/product/edit/{{$product->id}}"><i class="fas fa-edit"></i></a>
-                                    <a href="/admin/product/delete/{{$product->id}}"><i class="fas fa-trash"></i></a>
+                                    <a onclick="return del_user()" href="/admin/product/delete/{{$product->id}}"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                                 
@@ -99,3 +99,8 @@
     </footer>
 </div>
 @endsection
+<script>
+    function del_user(){
+        return confirm("bạn có muốn xóa sản phẩm này không?")
+    }
+</script>

@@ -12,13 +12,37 @@ use Illuminate\Support\Facades\DB;
 class CartController extends Controller
 {
     public function getCart(){
-          //dd(cart::content());
+         // dd(cart::content());
          $data['cart'] = cart::content();
+         $data['cartArray'] = $data['cart']->toArray();
+         //dd($data['cartArray']);
+         foreach($data['cartArray'] as $key => $value){
+             $totalPrd = $value['price']*$value['qty'];
+             $value['options']['totalPrd'] = $totalPrd;
+         }
+         //dd($data['cartArray']);
          $data['total'] = cart::total(0,'','');
         return view('/frontend/cart/shoping-cart',$data);
     }
 
     public function getAddCart(Request $r){
+        // $prdId = $r->id_product;
+
+        // $cart = Cart::content()->toArray();
+        // foreach($cart as $key => $value){
+        //     if($value['id'] == $prdId){
+        //         Cart::update($value['rowId'], ())
+        //     }
+        // }
+        //dd($cart);
+    //     $cartt =  $cart->search(function ($cartItem ,$rowId ) {
+    //         return $cartItem->id === $prdId ;
+    //    });
+        if(!empty($cartt)){
+            $qty = Cart::get($cartt);
+            dd($qty);
+            //Cart::update($cartt,$r)
+        }
         $Product = Product::find($r->id_product);
         //$price =($Product->price)-(($Product->price/100)*($Product->sale));
         $price = $Product->price;
@@ -58,9 +82,9 @@ class CartController extends Controller
         if(($prd['quantity']) < ($qty)){
             return "error";
         }else{
-            $totalPrd = $prd['price']*$qty;
-            Cart::update($rowId,   ['options'  => ['totalPrd' => $totalPrd]]);
-            Cart::update($rowId,   ['qty'  => $qty]);
+            // $totalPrd = $prd['price']*$qty;
+            // Cart::update($rowId,   ['options'  => ['totalPrd' => $totalPrd]]);
+            Cart::update($rowId, $qty);
             return "success";
         }
     }

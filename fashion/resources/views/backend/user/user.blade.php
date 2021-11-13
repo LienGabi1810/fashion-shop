@@ -54,13 +54,15 @@
                                 <td>{{$user->email}}</td>
                                 <td>@if($user->role == 1)
                                     Admin
-                                    @elseif($user->role == 0)
+                                    @elseif($user->role == 2)
                                     Manager
+                                    @elseif($user->role == 3)
+                                    Shiper
                                     @endif
                                 </td>
                                 <td>
                                     <a href="/admin/user/edit/{{$user->id}}"><i class="fas fa-edit"></i></a>
-                                    <a href="/admin/user/delete/{{$user->id}}"><i class="fas fa-trash"></i></a>
+                                    <a onclick="return del_user()" href="/admin/user/delete/{{$user->id}}"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -84,3 +86,9 @@
     </footer>
 </div>
 @endsection
+
+<script>
+    function del_user(){
+        return confirm("bạn có muốn xóa tài khoản này không?")
+    }
+</script>

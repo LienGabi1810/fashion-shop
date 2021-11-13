@@ -7,6 +7,7 @@ use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\EditUserRequest;
+use App\Models\User;
 
 class AdminUserController extends Controller
 {
@@ -47,7 +48,9 @@ class AdminUserController extends Controller
     }
 
     public function deleteUser($id){
-        $this->userRepo->deleteUser($id);
+        $user = User::find($id);
+        $user->delete();
+        //$this->userRepo->deleteUser($id);
         return redirect('/admin/user')->with('thongbao','Xóa tài khoản thành công');
     }
 }

@@ -19,7 +19,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
     public function getHotProduct()
     {
-        return $this->model->where('is_hightlight','like','1')->take(8)->get();
+        return $this->model->where('is_hightlight','like','1')->where('quantity','>',0)->take(8)->get();
     }
 
     public function geDetailProduct($id)
@@ -30,7 +30,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
     public function getNewProduct()
     {
-        return $this->model->orderBy('id','DESC')->take(8)->get();
+        return $this->model->where('quantity','>',0)->orderBy('id','DESC')->take(8)->get();
     }
 
     public function postProduct($id, $r)
