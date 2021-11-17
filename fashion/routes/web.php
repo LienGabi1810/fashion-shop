@@ -112,6 +112,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('',  [AdminCartController::class, 'getCart']); 
         Route::get('add',  [AdminCartController::class, 'getAddCart']);
         Route::get('ship',  [AdminCartController::class, 'getCartShip']); 
+        Route::get('changetoship/{vlue}/{id}',  [AdminCartController::class, 'changeToShip']); 
+        Route::get('changeship/{vlue}/{id}',  [AdminCartController::class, 'changeShip']); 
     
     });
 

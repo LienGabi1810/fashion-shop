@@ -50,7 +50,7 @@ class CheckoutController extends Controller
         $order->info =  $info;
         $order->status_order = 0;
         $order->true_false = '0';
-        $order->ship = '0';
+        $order->ship = '-1';
         $order->save();
 
         $array = json_decode(json_encode(Cart::content()), True);

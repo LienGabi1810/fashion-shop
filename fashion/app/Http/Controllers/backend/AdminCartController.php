@@ -24,5 +24,26 @@ class AdminCartController extends Controller
         $data['ship'] = User::all()->where('role','like',3);
         return view('backend/cart/order-for-ship',$data);
     }
+
+    public function changeToShip($value, $id){
+        $order = Order::find($id);
+        $order->ship = $value;
+        if($value == 0){
+            $order->status_order = 1;
+        }
+        $order->save();
+        return 'success';
+    }
+
+    public function changeShip($value, $id){
+        $order = Order::find($id);
+       
+        $order->ship_id = $value;
+        if($value){
+            $order->status_order = 1;
+        }
+        $order->save();
+        return 'success';
+    }
     
 }
