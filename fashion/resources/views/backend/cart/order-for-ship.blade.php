@@ -1,7 +1,7 @@
 @extends('backend/master/master')
 @section('title','Lien Fashion')
 @section('content')
-<div id="layoutSidenav_content">
+<div id="layoutSidenav_content" style="padding-left: 205px; padding-top: 50px;">
     <main>
         <div class="container-fluid px-4">
             <h1 class="mt-4">Đơn hàng</h1>
@@ -41,7 +41,7 @@
                         </tfoot>
                         <tbody>
                             @foreach ($order as $item)
-                            <tr>
+                            <tr data-id="{{$item->id}}">
                                 <td>{{$item->id}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->phone}}</td>
@@ -50,18 +50,18 @@
                                 <td>{{$item->total}}</td>
                                 <td>
                                     <select>
-                                        <option value="0" @if($item->ship==0)selected @endif>Đang chờ</option>    
-                                        <option value="1" @if($item->ship==1)selected @endif>Đang giao</option>    
-                                        <option value="2" @if($item->ship==2)selected @endif>Thành công</option>    
-                                        <option value="3" @if($item->ship==3)selected @endif>Thất bại</option>    
+                                        <option value="0" @if($item->status_order==0)selected @endif>Đang chờ</option>    
+                                        <option value="1" @if($item->status_order==1)selected @endif>Đang giao</option>    
+                                        <option value="2" @if($item->status_order==2)selected @endif>Thành công</option>    
+                                        <option value="3" @if($item->status_order==3)selected @endif>Thất bại</option>    
                                     </select>
                                 </td>
                                 <td>{{$item->created_at}}</td>
                                 <th>
-                                    <select>
-                                        <option value="0">Chon</option>
+                                    <select class="change-ship">
+                                        <option>Chon</option>
                                         @foreach ($ship as $row)
-                                        <option value="{{$row->id}}" >{{$row->name}}</option>
+                                        <option  @if($item->ship_id==$row->id) selected @endif value="{{$row->id}}">{{$row->name}}</option>
                                         @endforeach
                                     </select>
                                 </th>
@@ -86,4 +86,28 @@
         </div>
     </footer>
 </div>
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('.change-ship').on('change', function(){
+                var value = $(this).find('option:selected').val();
+                var id = $(this).parent().parent().attr('data-id');
+                $.get("/admin/cart/changeship/"+value+"/"+id,
+				function(data)
+				{
+					if(data=='success'){
+						alert('cập nhật thành công');
+                        window.location.reload();
+					}
+					else
+					{
+						alert('Cập nhật thất bại!');
+                        window.location.reload();
+					}
+				}
+			);
+            })
+        });
+
+    </script>
 @endsection
