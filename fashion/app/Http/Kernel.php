@@ -4,6 +4,8 @@ namespace App\Http;
 
 use App\Http\Middleware\CheckLogin;
 use App\Http\Middleware\CheckLogout;
+use App\Http\Middleware\CheckShipper;
+use App\Http\Middleware\CheckManager;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -65,6 +67,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'CheckLogin' => CheckLogin::class,
-        'CheckLogout' => CheckLogout::class
+        'CheckLogout' => CheckLogout::class,
+        'CheckShipper' => CheckShipper::class,
+        'CheckManager' => CheckManager::class
     ];
 }

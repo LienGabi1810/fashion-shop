@@ -7,7 +7,7 @@
             <h1 class="mt-4">Đơn hàng</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="index.html">Đơn hàng</a></li>
-                <li class="breadcrumb-item active">Danh sách ship</li>
+                <li class="breadcrumb-item active">Danh sách đơn hàng ship</li>
             </ol>
             {{-- <a href="/admin/cart/add" style="margin-bottom: 20px" type="button" class="btn btn-primary">Lên đơn</a> --}}
             <div class="card mb-4">
@@ -49,8 +49,8 @@
                                 <td>{{$item->info}}</td>
                                 <td>{{$item->total}}</td>
                                 <td>
-                                    <select>
-                                        <option value="0" @if($item->status_order==0)selected @endif>Đang chờ</option>    
+                                    <select class="change-status">
+                                        <option value="0" @if($item->status_order==0)selected @endif @if($item->status_order==1) disabled @endif>Đang chờ</option>    
                                         <option value="1" @if($item->status_order==1)selected @endif>Đang giao</option>    
                                         <option value="2" @if($item->status_order==2)selected @endif>Thành công</option>    
                                         <option value="3" @if($item->status_order==3)selected @endif>Thất bại</option>    
@@ -73,18 +73,6 @@
             </div>
         </div>
     </main>
-    <footer class="py-4 bg-light mt-auto">
-        <div class="container-fluid px-4">
-            <div class="d-flex align-items-center justify-content-between small">
-                <div class="text-muted">Copyright &copy; Your Website 2021</div>
-                <div>
-                    <a href="#">Privacy Policy</a>
-                    &middot;
-                    <a href="#">Terms &amp; Conditions</a>
-                </div>
-            </div>
-        </div>
-    </footer>
 </div>
 @section('js')
     <script>
@@ -93,6 +81,24 @@
                 var value = $(this).find('option:selected').val();
                 var id = $(this).parent().parent().attr('data-id');
                 $.get("/admin/cart/changeship/"+value+"/"+id,
+				function(data)
+				{
+					if(data=='success'){
+						alert('cập nhật thành công');
+                        window.location.reload();
+					}
+					else
+					{
+						alert('Cập nhật thất bại!');
+                        window.location.reload();
+					}
+				}
+			);
+            })
+            $('.change-status').on('change', function(){
+                var value = $(this).find('option:selected').val();
+                var id = $(this).parent().parent().attr('data-id');
+                $.get("/admin/cart/changestatus/"+value+"/"+id,
 				function(data)
 				{
 					if(data=='success'){
