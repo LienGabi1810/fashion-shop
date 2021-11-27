@@ -4,10 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Session;
 use Illuminate\Support\Facades\Auth;
 
-class CheckLogin
+class CheckShipper
 {
     /**
      * Handle an incoming request.
@@ -18,10 +17,11 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guest()) {
-            return redirect()->intended('/login');
+        if(Auth::user()->role ==1)
+        {
+            return $next($request);
         }
-
-        return $next($request);
+        else
+            return Redirect('/admin')->with('thongbao','Bạn không có quyền!!!');
     }
 }

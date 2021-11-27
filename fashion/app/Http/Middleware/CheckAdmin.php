@@ -4,10 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Session;
-use Illuminate\Support\Facades\Auth;
 
-class CheckLogin
+class CheckAdmin
 {
     /**
      * Handle an incoming request.
@@ -18,10 +16,6 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guest()) {
-            return redirect()->intended('/login');
-        }
-
         return $next($request);
     }
 }

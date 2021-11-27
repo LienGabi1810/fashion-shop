@@ -78,17 +78,20 @@ Route::group(['prefix' => 'checkout'], function () {
 
 //====BACKEND====
 
-Route::get('/admin',[AdminController::class, 'getIndex']);
+Route::get('/admin',[AdminController::class, 'getIndex'])->middleware('CheckLogin');
+Route::post('/admin/chart',[AdminController::class, 'getChart']);
+Route::post('/admin/chart30day',[AdminController::class, 'getChart30day']);
+
 
 //login
 
-Route::get('/login',[LoginController::class, 'getLogin']);
+Route::get('/login',[LoginController::class, 'getLogin'])->middleware('CheckLogout');
 Route::post('/login',[LoginController::class, 'postLogin']);
 Route::get('/logout',[LoginController::class, 'getLogout']);
 
 //category
 Route::group(['prefix' => 'admin'], function () {
-    Route::group(['prefix' => 'category'], function () {
+    Route::group(['prefix' => 'category','middleware' => 'CheckManager','CheckLogin'], function () {
         Route::get('',  [CategoryController::class, 'getCategory']);
         Route::post('',  [CategoryController::class, 'postCategory']); 
         Route::get('category-edit/{id}',  [CategoryController::class, 'getEditCategory']); 
@@ -98,7 +101,7 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     //product
-    Route::group(['prefix' => 'product'], function () {
+    Route::group(['prefix' => 'product','middleware' => 'CheckShipper'], function () {
         Route::get('',  [AdminProductController::class, 'getProduct']); 
         Route::get('add',  [AdminProductController::class, 'getAddProduct']); 
         Route::post('add',  [AdminProductController::class, 'postProduct']); 
@@ -108,17 +111,18 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     //cart
-    Route::group(['prefix' => 'cart'], function () {
+    Route::group(['prefix' => 'cart','middleware' => 'CheckShipper'], function () {
         Route::get('',  [AdminCartController::class, 'getCart']); 
         Route::get('add',  [AdminCartController::class, 'getAddCart']);
         Route::get('ship',  [AdminCartController::class, 'getCartShip']); 
         Route::get('changetoship/{vlue}/{id}',  [AdminCartController::class, 'changeToShip']); 
         Route::get('changeship/{vlue}/{id}',  [AdminCartController::class, 'changeShip']); 
+        Route::get('changestatus/{vlue}/{id}',  [AdminCartController::class, 'changeStatus']); 
     
     });
 
     //user
-    Route::group(['prefix' => 'user'], function () {
+    Route::group(['prefix' => 'user','middleware' => 'CheckShipper','CheckManager'], function () {
         Route::get('',  [AdminUserController::class, 'getUser']); 
         Route::get('add',  [AdminUserController::class, 'getAddUser']);
         Route::post('add',  [AdminUserController::class, 'postAddUser']);
