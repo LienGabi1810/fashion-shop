@@ -6,7 +6,6 @@
         <div class="container-fluid px-4">
             <h1 class="mt-4">Đơn hàng</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="index.html">Đơn hàng</a></li>
                 <li class="breadcrumb-item active">Danh sách đơn hàng</li>
             </ol>
             {{-- <a href="/admin/cart/add" style="margin-bottom: 20px" type="button" class="btn btn-primary">Lên đơn</a> --}}

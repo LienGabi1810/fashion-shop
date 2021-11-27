@@ -11,7 +11,6 @@
                 </div>
             @endif
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="index.html">Tài khoản</a></li>
                 <li class="breadcrumb-item active">Danh sách tài khoản</li>
             </ol>
             <a href="/admin/user/add" style="margin-bottom: 20px" type="button" class="btn btn-primary">Thêm tài khoản</a>

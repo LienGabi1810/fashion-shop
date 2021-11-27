@@ -11,8 +11,7 @@
                 </div>
             @endif
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="index.html">Product</a></li>
-                <li class="breadcrumb-item active">List Product</li>
+                <li class="breadcrumb-item active">Danh sách sản phẩm</li>
             </ol>
             <a href="/admin/product/add" style="margin-bottom: 20px" type="button" class="btn btn-primary">Thêm sản phẩm</a>
             <div class="card mb-4">
@@ -58,7 +57,7 @@
                                     <img src="/uploads/products/{{$product->image}}" alt="" style="height: 80px; width:80px">
                                 </td>
                                 <td>{{$product->name}}</td>
-                                <td>{{$product->category}}</td>
+                                <td>{{$product->category->name}}</td>
                                 <td>{{$product->quantity}}</td>
                                 <td>{{$product->status}}</td>
                                 <td>{{$product->price}}</td>
