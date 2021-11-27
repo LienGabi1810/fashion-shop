@@ -22,7 +22,7 @@
 					</div>
 				</div>
 			</div>
-
+			
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
 					
@@ -34,25 +34,15 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li class="active-menu">
-								<a href="/">Home</a>
-								<ul class="sub-menu">
-									<li><a href="index.html">Homepage 1</a></li>
-									<li><a href="home-02.html">Homepage 2</a></li>
-									<li><a href="home-03.html">Homepage 3</a></li>
-								</ul>
-							</li>
-
 							<li>
-								<a href="/product">Shop</a>
+								<a href="/">Home</a>
+							</li>
+							<li>
+								<a href="/product">Product</a>
 							</li>
 
 							<li class="label1" data-label1="hot">
 								<a href="/cart">Cart</a>
-							</li>
-
-							<li>
-								<a href="/blog">Blog</a>
 							</li>
 
 							<li>

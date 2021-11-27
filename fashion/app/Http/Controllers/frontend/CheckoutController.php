@@ -98,7 +98,7 @@ class CheckoutController extends Controller
         //         $message->subject('Xác nhận đơn hàng');
         // });
         Cart::Destroy();
-        // return Redirect('success');
+        return Redirect('/cart')->with('thongbao','Bạn đã đặt hàng thành công');
     }
     
 }

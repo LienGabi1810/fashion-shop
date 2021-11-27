@@ -156,6 +156,13 @@
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			console.log( "ready!" );
+			var popup = document.getElementById("myPopup");
+			popup.classList.toggle("show");
+		});
+	</script>
 
 </body>
 </html>
