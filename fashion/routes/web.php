@@ -79,6 +79,7 @@ Route::group(['prefix' => 'checkout'], function () {
 //====BACKEND====
 
 Route::get('/admin',[AdminController::class, 'getIndex'])->middleware('CheckLogin');
+Route::get('/ship',[AdminController::class, 'getIndex'])->middleware('CheckLogin');
 Route::post('/admin/chart',[AdminController::class, 'getChart']);
 Route::post('/admin/chart30day',[AdminController::class, 'getChart30day']);
 
