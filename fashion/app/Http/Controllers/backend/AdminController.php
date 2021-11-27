@@ -61,7 +61,7 @@ class AdminController extends Controller
         for($i=1;$i<=$month_n;$i++)
         {
             $monthjs[$i]='tháng '.$i;
-            $numberjs[$i]=Order::where('status_order',1)->whereMonth('updated_at',$i)->whereYear('updated_at',$year_n)->sum('total');
+            $numberjs[$i]=Order::where('status_order',2)->whereMonth('updated_at',$i)->whereYear('updated_at',$year_n)->sum('total');
             $get = Order::where('status_order',1)->whereMonth('updated_at', $current_month)->whereYear('updated_at',$current_year)->get();
         }
       
