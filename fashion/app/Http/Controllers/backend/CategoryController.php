@@ -23,7 +23,8 @@ class CategoryController extends Controller
     }
 
     public function getCategory(){
-        $category = $this->categoryRepo->getAll();
+        //$category = $this->categoryRepo->getAll();
+        $category = Category::all();
         return view('/backend/category/category',['category' => $category]);
     }
 
