@@ -15,7 +15,12 @@
 			</span>
 		</div>
 	</div>
-		
+	
+	@if(!empty(session('thongbao')))
+	<div class="alert alert-primary" role="alert" style="text-align: center;"">
+		<h3>Bạn đã đặt hàng thành công. Vui lòng kiểm tra email để biết thêm thông tin</h3>
+	  </div>
+	@endif
 
 	<!-- Shoping Cart -->
 	<form class="bg0 p-t-75 p-b-85">
