@@ -11,6 +11,7 @@ use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\AdminProductController;
 use App\Http\Controllers\backend\AdminUserController;
 use App\Http\Controllers\backend\LoginController;
+use App\Http\Controllers\backend\ShiperController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\CustomerLoginController;
 
@@ -78,8 +79,8 @@ Route::group(['prefix' => 'checkout'], function () {
 
 //====BACKEND====
 
-Route::get('/admin',[AdminController::class, 'getIndex'])->middleware('CheckLogin');
-Route::get('/ship',[AdminController::class, 'getIndex'])->middleware('CheckLogin');
+Route::get('/admin',[AdminController::class, 'getIndex'])->middleware('CheckLogin','CheckShipper');
+
 Route::post('/admin/chart',[AdminController::class, 'getChart']);
 Route::post('/admin/chart30day',[AdminController::class, 'getChart30day']);
 
@@ -130,6 +131,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('edit/{id}',  [AdminUserController::class, 'getEditUser']);
         Route::post('edit/{id}',  [AdminUserController::class, 'postEditUser']);
         Route::get('delete/{id}',  [AdminUserController::class, 'deleteUser']);
+    
+    });
+
+    //ship
+    Route::group(['prefix' => 'ship'], function () {
+        Route::get('/',[ShiperController::class, 'getIndex']);
+        Route::post('/changestatusship',[ShiperController::class, 'changeStatus']);
     
     });
 

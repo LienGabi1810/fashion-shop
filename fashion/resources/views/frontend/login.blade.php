@@ -166,6 +166,11 @@ a{color:inherit;text-decoration:none}
                 This is a danger alert—check it out!
               </div>
             @endif
+			@if(!empty(session('thongbao')))
+            <div class="alert alert-danger" role="alert" style="margin-bottom: " style="text-align: center ;color: beige;">
+                {{session('thongbao')}}
+              </div>
+            @endif
             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab" style="display:none;">Sign Up</label>
             <div class="login-form">

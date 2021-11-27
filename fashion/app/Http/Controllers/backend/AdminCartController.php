@@ -48,7 +48,6 @@ class AdminCartController extends Controller
 
     public function changeStatus($value, $id){
         $order = Order::find($id);
-       
         $order->status_order = $value;
         $order->save();
         return 'success';

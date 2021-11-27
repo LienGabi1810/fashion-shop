@@ -6,7 +6,7 @@
         <div class="container-fluid px-4">
             <h1 class="mt-4">Sản phẩm</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="index.html">Sản phẩm</a></li>
+                <li class="breadcrumb-item"><a href="/admin/product">Sản phẩm</a></li>
                 <li class="breadcrumb-item active">Thêm mới sản phẩm</li>
             </ol>
             <form method="POST" enctype="multipart/form-data" action="/admin/product/add">
@@ -17,10 +17,7 @@
                     <div class="form-group">
                         <label>Danh mục</label>
                         <select name="category_id" class="form-control">
-                            <option value='1' selected>Nam</option>
-                            <option value='3'>---|Áo khoác nam</option>
-                            <option value='2'>Nữ</option>
-                            <option value='4'>---|Áo khoác nữ</option>
+                            {{getCategory($category,0,'',0)}}
                         </select>
                         {{showErrors($errors,'category_id')}}
                     </div>

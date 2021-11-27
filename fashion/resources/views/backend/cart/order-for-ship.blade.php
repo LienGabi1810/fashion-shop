@@ -6,7 +6,6 @@
         <div class="container-fluid px-4">
             <h1 class="mt-4">Đơn hàng</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="index.html">Đơn hàng</a></li>
                 <li class="breadcrumb-item active">Danh sách đơn hàng ship</li>
             </ol>
             {{-- <a href="/admin/cart/add" style="margin-bottom: 20px" type="button" class="btn btn-primary">Lên đơn</a> --}}
@@ -49,16 +48,16 @@
                                 <td>{{$item->info}}</td>
                                 <td>{{$item->total}}</td>
                                 <td>
-                                    <select class="change-status">
-                                        <option value="0" @if($item->status_order==0)selected @endif @if($item->status_order==1) disabled @endif>Đang chờ</option>    
-                                        <option value="1" @if($item->status_order==1)selected @endif>Đang giao</option>    
-                                        <option value="2" @if($item->status_order==2)selected @endif>Thành công</option>    
-                                        <option value="3" @if($item->status_order==3)selected @endif>Thất bại</option>    
+                                    <select class="change-status" @if($item->status_order==2 || $item->status_order==3) disabled @endif>
+                                        <option value="0" @if($item->status_order==0)selected @endif @if($item->status_order==1 || $item->status_order==2 || $item->status_order==3) disabled @endif>Đang chờ</option>    
+                                        <option value="1" @if($item->status_order==1)selected @endif @if($item->status_order==2 || $item->status_order==3) disabled @endif>Đang giao</option>    
+                                        <option value="2" @if($item->status_order==2)selected @endif @if( $item->status_order==3) disabled @endif>Thành công</option>    
+                                        <option value="3" @if($item->status_order==3)selected @endif @if($item->status_order==2) disabled @endif>Thất bại</option>    
                                     </select>
                                 </td>
                                 <td>{{$item->created_at}}</td>
                                 <th>
-                                    <select class="change-ship">
+                                    <select class="change-ship" @if($item->status_order==2 || $item->status_order==3) disabled @endif>
                                         <option>Chon</option>
                                         @foreach ($ship as $row)
                                         <option  @if($item->ship_id==$row->id) selected @endif value="{{$row->id}}">{{$row->name}}</option>

@@ -8,7 +8,7 @@
         <div class="container-fluid px-4">
             <h1 class="mt-4">Tài khoản</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="index.html">Tài khoản</a></li>
+                <li class="breadcrumb-item"><a href="/admin/user">Tài khoản</a></li>
                 <li class="breadcrumb-item active">Thêm mới tài khoản</li>
             </ol>
             <div class="container">

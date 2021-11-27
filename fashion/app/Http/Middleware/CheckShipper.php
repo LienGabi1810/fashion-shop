@@ -17,11 +17,11 @@ class CheckShipper
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role ==1)
+        if(Auth::user()->role ==3)
         {
-            return $next($request);
+            return Redirect('/admin/ship');
         }
         else
-            return Redirect('/admin')->with('thongbao','Bạn không có quyền!!!');
+        return $next($request);
     }
 }

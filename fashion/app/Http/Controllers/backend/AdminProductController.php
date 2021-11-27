@@ -8,8 +8,7 @@ use App\Models\ImagesProduct;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Http\Requests\AddProductRequest;
 use App\Http\Requests\EditProductRequest;
-
-
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class AdminProductController extends Controller
@@ -25,12 +24,14 @@ class AdminProductController extends Controller
     }
 
     public function getProduct(){
-        $products = $this->productRepo->getAll();
-        return view('/backend/product/product',['products' =>$products]);
+        //$products = $this->productRepo->getAll();
+        $data['products'] = Product::paginate(10);
+        return view('/backend/product/product',$data);
     }
 
     public function getAddProduct(){
-        return view('/backend/product/add-product');
+        $data['category'] = Category::all();
+        return view('/backend/product/add-product',$data);
     }
 
     public function postProduct(AddProductRequest $r){
@@ -69,7 +70,8 @@ class AdminProductController extends Controller
 
     public function getEditProduct($id){
         $product = $this->productRepo->find($id);
-        return view('/backend/product/edit-product',['product' =>$product]);
+        $category = Category::all();
+        return view('/backend/product/edit-product',['product' =>$product,'category'=>$category]);
     }
 
     public function postEditProduct(EditProductRequest $r, $id){

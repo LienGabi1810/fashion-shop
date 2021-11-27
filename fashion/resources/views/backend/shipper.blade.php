@@ -13,6 +13,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <table id="datatablesSimple">
+                        @csrf
                         <thead>
                             <tr>
                                 <th>Mã đơn hàng</th>
@@ -21,9 +22,8 @@
                                 <th>Địa chỉ</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Tổng tiền</th>
-                                <th>Tình trạng</th>
                                 <th>Ngày lên đơn</th>
-                                <th>Lựa chọn ship</th>
+                                <th>Tình trạng</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -34,9 +34,8 @@
                                 <th>Địa chỉ</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Tổng tiền</th>
-                                <th>Tình trạng</th>
                                 <th>Ngày lên đơn</th>
-                                <th>Lựa chọn ship</th>
+                                <th>Tình trạng</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -48,23 +47,15 @@
                                 <td>{{$item->address}}</td>
                                 <td>{{$item->info}}</td>
                                 <td>{{$item->total}}</td>
+                                <td>{{$item->created_at}}</td>
                                 <td>
-                                    <select class="change-status">
+                                    <select class="change-status" @if($item->status_order==2||$item->status_order==3) disabled @endif>
                                         <option value="0" @if($item->status_order==0)selected @endif @if($item->status_order==1) disabled @endif>Đang chờ</option>    
                                         <option value="1" @if($item->status_order==1)selected @endif>Đang giao</option>    
                                         <option value="2" @if($item->status_order==2)selected @endif>Thành công</option>    
                                         <option value="3" @if($item->status_order==3)selected @endif>Thất bại</option>    
                                     </select>
                                 </td>
-                                <td>{{$item->created_at}}</td>
-                                <th>
-                                    <select class="change-ship">
-                                        <option>Chon</option>
-                                        @foreach ($ship as $row)
-                                        <option  @if($item->ship_id==$row->id) selected @endif value="{{$row->id}}">{{$row->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </th>
                             </tr>
                             @endforeach
                         </tbody>
@@ -77,41 +68,29 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            $('.change-ship').on('change', function(){
-                var value = $(this).find('option:selected').val();
-                var id = $(this).parent().parent().attr('data-id');
-                $.get("/admin/cart/changeship/"+value+"/"+id,
-				function(data)
-				{
-					if(data=='success'){
-						alert('cập nhật thành công');
-                        window.location.reload();
-					}
-					else
-					{
-						alert('Cập nhật thất bại!');
-                        window.location.reload();
-					}
-				}
-			);
-            })
             $('.change-status').on('change', function(){
                 var value = $(this).find('option:selected').val();
                 var id = $(this).parent().parent().attr('data-id');
-                $.get("/admin/cart/changestatus/"+value+"/"+id,
-				function(data)
-				{
-					if(data=='success'){
-						alert('cập nhật thành công');
+                var _token = $('input[name="_token"]').val();
+                    var url = "http://127.0.0.1:8000/admin/ship/changestatusship"
+                    $.ajax({
+                        url: url,
+                        method: "POST",
+                        dataType: "JSON",
+                        data:{id:id,value:value,_token:_token},
+                    success:function(data){
+                    if(data=='success'){
+                        alert('cập nhật thành công');
                         window.location.reload();
-					}
-					else
-					{
-						alert('Cập nhật thất bại!');
+                    }else{
+                        alert('Cập nhật thất bại');
                         window.location.reload();
-					}
-				}
-			);
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert('Error: ' + textStatus + ' ' + errorThrown);
+                  }
+                });  
             })
         });
 
