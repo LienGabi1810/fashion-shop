@@ -184,9 +184,9 @@ a{color:inherit;text-decoration:none}
                             <input type="submit" class="button" value="Sign In">
                         </div>
                         <div class="hr"></div>
-                        {{-- <div class="foot-lnk">
-                            <a href="#forgot">Forgot Password?</a>
-                        </div> --}}
+                        <div class="foot-lnk">
+                            <a href="/customerregister">Register now</a>
+                        </div>
                     </div>
                 </form>
                 <form method="POST" action="/customerregister">

@@ -43,6 +43,7 @@ class CheckoutController extends Controller
         $order->email = $request->email;
         $order->total = Cart::total(0,'','');
         $order->COD = $cod;
+        $order->ship_id = 0;
         $info = '';
         foreach(Cart::content() as $row){
             $info = $info.$row->qty.' '.$row->name.': '.($row->qty*$row->price).'|';

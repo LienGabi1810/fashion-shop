@@ -41,6 +41,7 @@ class CustomerLoginController extends Controller
             $customer->password = bcrypt($r->password);
             $customer->save();
         }
+        return redirect('/customerlogin')->with('thongbao','Đăng ký thành công');
     }
 
     public function getCustomerLogout(){
