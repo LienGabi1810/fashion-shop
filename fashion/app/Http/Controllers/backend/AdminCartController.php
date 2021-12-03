@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class AdminCartController extends Controller
 {
     public function getCart(){
-        $data['order'] = Order::all();
+        $data['order'] = Order::paginate(10);
         return view('backend/cart/cart',$data);
     }
 

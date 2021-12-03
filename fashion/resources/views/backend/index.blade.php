@@ -15,10 +15,9 @@
                 </div>
             @endif
             <div class="row">
-                <form action="">
                     @csrf
-                    {{-- <div style="display: flex">
-                        <div class="col-md-2" style="margin-right: 20px">
+                    <div style="display: flex">
+                        {{-- <div class="col-md-2" style="margin-right: 20px">
                             <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
 
                             <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm"
@@ -26,22 +25,43 @@
                         </div>
                         <div class="col-md-2" style="margin-right: 20px">
                             <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
+                        </div> --}}
+                        <div class="col-md-2" style="margin-right: 20px">
+                            <p>Tháng: 
+                                <select class="dashboard-filter form-control" id="month">
+                                    <option><--Chọn--></option>
+                                    @for($i=1;$i<=12;$i++) 
+                                        <option value="{{$i}}">Tháng {{$i}}</option> 
+                                    @endfor
+                                </select>
+                            </p>
+
+                            <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm"
+                                value="Lọc kết quả">
+                        </div>
+                        <div class="col-md-2" style="margin-right: 20px">
+                            <p>Năm: 
+                                <select class="dashboard-filter form-control" id="year">
+                                    <option><--Chọn--></option>
+                                    @for($i=2018;$i<=2023;$i++) 
+                                        <option value="{{$i}}">Năm {{$i}}</option> 
+                                    @endfor
+                                </select>
+                            </p>
                         </div>
 
                         <div class="col-md-2">
                             <p>
                                 Lọc theo:
-                                <select class="dashboard-filter form-control">
+                                <select class="dashboard-filter form-control" id="chart-onchange">
                                     <option><--Chọn--></option>
-                                    <option value="7ngayqua">7 ngày qua</option>
                                     <option value="thangtruoc">Tháng trước</option>
                                     <option value="thangnay">Tháng này</option>
                                     <option value="365ngayqua">365 ngày qua</option>
                                 </select>
                             </p>
                         </div>
-                    </div> --}}
-                </form>
+                    </div>
                 <div class="col-xl-12" style="margin-top: 20px;">
                     <div class="card mb-4">
                         <div class="card-header">
@@ -71,7 +91,7 @@
        // ID of the element in which to draw the chart.
        element: 'chart',
 
-       lineColors: ['#407294'],
+       lineColors: ['#407294','#800869'],
        pointFillColors:['#ffff'],
        pointStrokeColors: ['black'],
        fillOpacity: 0.3,
@@ -83,31 +103,58 @@
        // The name of the data record attribute that contains x-values.
        xkey: 'date',
        // A list of names of data record attributes that contain y-values.
-       ykeys: ['total'],
+       ykeys: ['sales','total'],
        behaveLikeline: true,
        // Labels for the ykeys -- will be displayed when you hover over the
        // chart.
-       labels: ['Tổng tiền']
+       labels: ['Doanh thu','Tổng đơn hàng']
        });
 
        
 
-       // $("#btn-dashboard-filter").click(function(){
-       //     var _token = $('input[name="_token"]').val();
-       //     var from_date = $('#datepicker').val();
-       //     var to_date = $('#datepicker2').val();
-       //     var url = "http://127.0.0.1:8000/admin/chart"
-       //     $.ajax({
-       //         url: url,
-       //         method: "POST",
-       //         dataType: "JSON",
-       //         data:{from_date:from_date,to_date:to_date,_token:_token},
+       $("#btn-dashboard-filter").click(function(){
+           var _token = $('input[name="_token"]').val();
+           var from_date = $('#datepicker').val();
+           var to_date = $('#datepicker2').val();
+           var month = $('#month').val();
+           var year = $('#year').val();
+           var url = "http://127.0.0.1:8000/admin/chart"
+           $.ajax({
+               url: url,
+               method: "POST",
+               dataType: "JSON",
+               data:{_token:_token,month:month,year:year},
 
-       //         success:function(data){
-       //             chart.setData(data);
-       //         }
-       //     });     
-       // });
+               success:function(data){
+                   console.log(data);
+                    chart.setData(data);
+               }
+           });     
+       });
+
+       $("#chart-onchange").on('change',function(){
+           var value = $(this).val();
+           var _token = $('input[name="_token"]').val();
+           if(value == 'thangtruoc'){
+                var url = "http://127.0.0.1:8000/admin/lastmonth"
+           } else if(value == '365ngayqua'){
+                var url = "http://127.0.0.1:8000/admin/oneyear"
+           }
+           else if(value == 'thangnay'){
+                var url = "http://127.0.0.1:8000/admin/chart30day"
+           }
+           $.ajax({
+               url: url,
+               method: "POST",
+               dataType: "JSON",
+               data:{value:value,_token:_token},
+
+               success:function(data){
+                console.log(data);
+                   chart.setData(data);
+               }
+           });     
+       });
 
        function getChart30day(){
            var _token = $('input[name="_token"]').val();
@@ -122,6 +169,8 @@
                }
            });  
        }
+
+
    });
 </script> 
 @endsection

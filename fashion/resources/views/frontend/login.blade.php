@@ -161,11 +161,6 @@ a{color:inherit;text-decoration:none}
 <body>
     <div class="login-wrap">
         <div class="login-html">
-            @if(!empty(session('status')))
-            <div class="alert alert-danger" role="alert" style="margin-bottom: ">
-                This is a danger alert—check it out!
-              </div>
-            @endif
 			@if(!empty(session('thongbao')))
             <div class="alert alert-danger" role="alert" style="margin-bottom: " style="text-align: center ;color: beige;">
                 {{session('thongbao')}}
@@ -174,16 +169,16 @@ a{color:inherit;text-decoration:none}
             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab" style="display:none;">Sign Up</label>
             <div class="login-form">
-                <form method="POST" action="/customerlogin">
+                <form method="POST" action="/customerlogin" autocomplete="off">
                     @csrf
                     <div class="sign-in-htm">
                         <div class="group">
                             <label for="user" class="label">Username</label>
-                            <input id="user" name="username" type="text" class="input">
+                            <input id="user" name="username" type="text" class="input" autocomplete="false">
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Password</label>
-                            <input id="pass" name="password" type="password" class="input" data-type="password">
+                            <input id="pass" name="password" type="password" class="input" data-type="password" autocomplete="off">
                         </div>
                         <div class="group">
                             <input type="submit" class="button" value="Sign In">

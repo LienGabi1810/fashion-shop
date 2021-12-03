@@ -23,7 +23,7 @@ class CustomerLoginController extends Controller
             $r->session()->regenerate();
             return redirect('/');
         } else {
-            return back()->with('status', 'Email hoặc Password không chính xác');
+            return back()->with('thongbao', 'Email hoặc Password không chính xác');
         }
     }   
 
