@@ -15,9 +15,11 @@
 			</span>
 		</div>
 	</div>
+    
     <form method="POST" action="/checkout" style="margin-top:30px">
         @csrf
 		<div class="container">
+            <input type="hidden" name="is_login" value="@if(!empty(Auth::guard('customer')->user())) {{ Auth::guard('customer')->user()->email}} @endif">
 			<div class="row">
 				<div class="col-md-6">
                     <div class="form-group">

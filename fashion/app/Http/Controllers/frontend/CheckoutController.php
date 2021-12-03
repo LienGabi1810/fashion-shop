@@ -15,6 +15,9 @@ class CheckoutController extends Controller
     }
 
     public function getPost(Request $request){
+        if(empty($request->is_login)){
+            return redirect('/customerlogin')->with('thongbao','Bạn cần phải đăng nhập trước khi đặt hàng!');
+        }
         $len = 30;
         $cod = substr(md5(rand()), 0, $len);
         // if(!empty($request->email_account)){

@@ -167,11 +167,11 @@ a{color:inherit;text-decoration:none}
                 <div class="sign-in-htm">
                     <div class="group">
                         <label for="user" class="label">Username</label>
-                        <input id="user" name="username" type="text" class="input">
+                        <input id="user" name="username" type="text" class="input" autocomplete="off">
                     </div>
                     <div class="group">
                         <label for="pass" class="label">Password</label>
-                        <input id="pass" name="password" type="password" class="input" data-type="password">
+                        <input id="pass" name="password" type="password" class="input" data-type="password" autocomplete="off">
                     </div>
                     <div class="group">
                         <input type="submit" class="button" value="Sign In">
@@ -181,24 +181,24 @@ a{color:inherit;text-decoration:none}
                         <a href="#forgot">Forgot Password?</a>
                     </div> --}}
                 </div>
-                <form method="POST" action="/customerregister">
+                <form method="POST" action="/customerregister" autocomplete="off">
                     @csrf
                     <div class="sign-up-htm">
                         <div class="group">
                             <label for="user" class="label">Username</label>
-                            <input id="user" name="username" type="text" class="input">
+                            <input id="user" name="username" type="text" class="input" autocomplete="off">
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Password</label>
-                            <input id="pass" name="password" type="password" class="input" data-type="password">
+                            <input id="pass" name="password" type="password" class="input" data-type="password" autocomplete="off">
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Repeat Password</label>
-                            <input id="pass" name="repeatpassword" type="password" class="input" data-type="password">
+                            <input id="pass" name="repeatpassword" type="password" class="input" data-type="password" autocomplete="off">
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Email Address</label>
-                            <input id="pass" name="email" type="text" class="input">
+                            <input id="pass" name="email" type="text" class="input" autocomplete="off">
                         </div>
                         <div class="group">
                             <input type="submit" class="button" value="Sign Up">

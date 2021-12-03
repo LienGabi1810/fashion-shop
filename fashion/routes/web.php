@@ -83,6 +83,8 @@ Route::get('/admin',[AdminController::class, 'getIndex'])->middleware('CheckLogi
 
 Route::post('/admin/chart',[AdminController::class, 'getChart']);
 Route::post('/admin/chart30day',[AdminController::class, 'getChart30day']);
+Route::post('/admin/lastmonth',[AdminController::class, 'getLastMonth']);
+Route::post('/admin/oneyear',[AdminController::class, 'getOneYear']);
 
 
 //login
