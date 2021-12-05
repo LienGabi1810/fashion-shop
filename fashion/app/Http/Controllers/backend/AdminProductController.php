@@ -10,6 +10,9 @@ use App\Http\Requests\AddProductRequest;
 use App\Http\Requests\EditProductRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Exports\ProductExport;
+use App\Imports\ProductImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminProductController extends Controller
 {
@@ -76,6 +79,35 @@ class AdminProductController extends Controller
 
     public function postEditProduct(EditProductRequest $r, $id){
         $productUpdate = $this->productRepo->postProduct($id,$r);
+        if($r->hasFile('image1'))
+        {
+            $imageProduct1 = 'IMAGE-PRODUCT'.time().$r->file('image1')->getClientOriginalName();
+            $filee1 = $r->image1;
+            $fileName1 = $filee1->getClientOriginalName();
+            $filee1->move('uploads/products',$fileName1);
+        }
+        if($r->hasFile('image2'))
+        {
+            $imageProduct2 = 'IMAGE-PRODUCT'.time().$r->file('image2')->getClientOriginalName();
+            $filee2 = $r->image2;
+            $fileName2 = $filee2->getClientOriginalName();
+            $filee2->move('uploads/products',$fileName2);
+        }
+        if($r->hasFile('image3'))
+        {
+            $imageProduct3 = 'IMAGE-PRODUCT'.time().$r->file('image3')->getClientOriginalName();
+            $filee3 = $r->image3;
+            $fileName3 = $filee3->getClientOriginalName();
+            $filee3->move('uploads/products',$fileName3);
+        }
+        
+        $imagesProduct = new ImagesProduct();
+        $imagesProduct->images = '1';
+        $imagesProduct->product_id = $id;
+        $imagesProduct->images1 = $fileName1;
+        $imagesProduct->images2 = $fileName2;
+        $imagesProduct->images3 = $fileName3;
+        $imagesProduct->save();
         return redirect('/admin/product')->with('thongbao','Chỉnh sửa sản phẩm thành công');
     }
 
@@ -84,5 +116,25 @@ class AdminProductController extends Controller
         $product->delete();
         //$this->productRepo->deleteProduct($id);
         return redirect('/admin/product')->with('thongbao','Xóa sản phẩm thành công');
+    }
+
+    public function importExportView()
+    {
+       return view('import');
+    }
+
+    public function export() 
+    {
+        return Excel::download(new ProductExport, 'users.xlsx');
+    }
+   
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function import() 
+    {
+        Excel::import(new ProductImport,request()->file('file'));
+           
+        return back()->with('thongbao','Import sản phẩm thành công');
     }
 }

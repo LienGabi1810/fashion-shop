@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -51,6 +52,51 @@ class AdminCartController extends Controller
         $order->status_order = $value;
         $order->save();
         return 'success';
+    }
+
+    public function orderDetail(Request $request){
+        $dataRequest = $request->all();
+        $id = $dataRequest['value'];
+        //$id = 19;
+        $order = Order::find($id);
+        $infoArr = explode('|',rtrim($order->info,'||'));
+        foreach($infoArr as $key => $value){
+            $info = strstr($value, 'id');
+            $idProduct = (int) filter_var($info, FILTER_SANITIZE_NUMBER_INT);
+            
+            $product = Product::find($idProduct);
+            $code_product = $product->code;
+            $name_product = $product->name;
+            $price_product = $product->price;
+            $totalPrd = $price_product * $value[0];
+            $data[$key] = array(
+                'quantity' => $value[0],
+                'code' => $code_product,
+                'name' => $name_product,
+                'price' => $price_product,
+                'totalPrd' => $totalPrd,
+                'total' => $order->total,
+            );
+        }
+
+        $html = '';
+        foreach($data as $key => $value){
+            $html .= '<tr>
+                        <th scope="row">1</th>
+                        <td>'.$value['code'].'</td>
+                        <td>'.$value['name'].'</td>
+                        <td>'.$value['quantity'].'</td>
+                        <td>'.$value['price'].'</td>
+                        <td>'.$value['totalPrd'].'</td>
+                        </tr>
+            ';
+        }
+        $result = array(
+            'html' => $html,
+            'total' => $order->total
+        );
+
+        echo json_encode($result);
     }
     
 }

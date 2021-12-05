@@ -85,6 +85,7 @@ Route::post('/admin/chart',[AdminController::class, 'getChart']);
 Route::post('/admin/chart30day',[AdminController::class, 'getChart30day']);
 Route::post('/admin/lastmonth',[AdminController::class, 'getLastMonth']);
 Route::post('/admin/oneyear',[AdminController::class, 'getOneYear']);
+Route::post('/admin/chartdonut',[AdminController::class, 'getChartDonut']);
 
 
 //login
@@ -112,6 +113,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('edit/{id}',  [AdminProductController::class, 'getEditProduct']); 
         Route::post('edit/{id}',  [AdminProductController::class, 'postEditProduct']); 
         Route::get('delete/{id}',  [AdminProductController::class, 'deleteProduct']); 
+        Route::get('export', [AdminProductController::class, 'export']); 
+        Route::get('importExportView', [AdminProductController::class, 'importExportView']); 
+        Route::post('import', [AdminProductController::class, 'import']); 
     });
 
     //cart
@@ -122,6 +126,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('changetoship/{vlue}/{id}',  [AdminCartController::class, 'changeToShip']); 
         Route::get('changeship/{vlue}/{id}',  [AdminCartController::class, 'changeShip']); 
         Route::get('changestatus/{vlue}/{id}',  [AdminCartController::class, 'changeStatus']); 
+        Route::post('order-detail',  [AdminCartController::class, 'orderDetail']); 
     
     });
 

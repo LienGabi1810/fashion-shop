@@ -14,6 +14,13 @@
                 <li class="breadcrumb-item active">Danh sách sản phẩm</li>
             </ol>
             <a href="/admin/product/add" style="margin-bottom: 20px" type="button" class="btn btn-primary">Thêm sản phẩm</a>
+            <form action="/admin/product/import" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="file" class="form-control">
+                <br>
+                <button class="btn btn-success">Import Product Data</button>
+                <a class="btn btn-warning" href="/admin/product/export">Export Product Data</a>
+            </form>
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>

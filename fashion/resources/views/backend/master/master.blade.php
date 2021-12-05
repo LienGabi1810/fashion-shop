@@ -16,7 +16,11 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         {{-- ChartScript --}}
-        
+        <style>
+            .custom{
+                width: 80%;
+            }
+        </style>
     </head>
     <body class="sb-nav-fixed">
         <!--header-->

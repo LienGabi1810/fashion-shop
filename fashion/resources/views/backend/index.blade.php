@@ -70,7 +70,15 @@
                         </div>
                         <div id="chart" style="height:250px">
                         </div>
-                        {{-- <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div> --}}
+                    </div>
+                </div>
+                <div class="col-xl-12" style="margin-top: 20px;">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-chart-area me-1"></i>
+                           Tổng quan đơn hàng
+                        </div>
+                        <div id="donut-example"></div>
                     </div>
                 </div>
             </div>
@@ -86,6 +94,7 @@
     $(document).ready(function(){
 
        getChart30day();
+       getChartDonut();
 
        var chart =   new Morris.Area({
        // ID of the element in which to draw the chart.
@@ -110,7 +119,14 @@
        labels: ['Doanh thu','Tổng đơn hàng']
        });
 
-       
+        var donut = Morris.Donut({
+            element: 'donut-example',
+            data: [
+                {label: "Download Sales", value: 12},
+                {label: "In-Store Sales", value: 30},
+                {label: "Mail-Order Sales", value: 20}
+            ]
+        });
 
        $("#btn-dashboard-filter").click(function(){
            var _token = $('input[name="_token"]').val();
@@ -166,6 +182,27 @@
                data:{_token:_token},
                success:function(data){
                    chart.setData((data));
+               }
+           });  
+       }
+
+       function getChartDonut(){
+           var _token = $('input[name="_token"]').val();
+           var url = "http://127.0.0.1:8000/admin/chartdonut";
+           var data1 = [
+                {label: "Download Sales", value: 12},
+                {label: "In-Store Sales", value: 30},
+                {label: "Mail-Order Sales", value: 20}
+            ];
+            console.log(data1);
+           $.ajax({
+               url: url,
+               method: "POST",
+               dataType: "JSON",
+               data:{_token:_token},
+               success:function(data){
+                   console.log(data);
+                   donut.setData((data));
                }
            });  
        }
