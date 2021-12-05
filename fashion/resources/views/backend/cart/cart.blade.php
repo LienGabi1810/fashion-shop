@@ -10,6 +10,7 @@
             </ol>
             {{-- <a href="/admin/cart/add" style="margin-bottom: 20px" type="button" class="btn btn-primary">Lên đơn</a> --}}
             <div class="card mb-4">
+                @csrf
                 <div class="card-body">
                     <table id="datatablesSimple">
                         <thead>
@@ -45,7 +46,9 @@
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->phone}}</td>
                                 <td>{{$item->address}}</td>
-                                <td>{{$item->info}}</td>
+                                <td> 
+                                    <button class="order-detail" data-value = {{$item->id}}>Xem chi tiết</button>
+                                </td>
                                 <td>{{$item->total}}</td>
                                 <td>
                                     <select>
@@ -74,6 +77,58 @@
             </div>
         </div>
     </main>
+    <div id="dialog" title="Chi tiết đơn hàng" hidden>
+        <div style="display: flex; text-align: center">
+            <div>
+                <i class="fab fa-shopify"></i>
+            </div>
+            <div>
+                <h5>Liên Fashion </h5>
+            </div>
+            
+        </div>
+       <div style="text-align: center">
+            <label for=""><b>Hóa đơn bán hàng</b></label>
+       </div>
+        
+       <div>
+        <label for="">Địa chỉ: .... Cầu giấy - Hà nội</label>
+        <br>
+        <label for="">Số điện thoại: 0981998598</label>
+        <br>
+        <label for="">Ngày lên đơn: 05/12/2021</label>
+        <br>
+        <label for="">Ngày xuất hóa đơn: 05/12/2021</label>
+        <br>
+        <label for="">Mã hóa đơn: 12165465465</label>
+       </div>
+        <div class="container">
+			<table class="table" id="order-detail">
+                <thead>
+                  <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Mã sản phẩm</th>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Đơn giá</th>
+                    <th scope="col">Thành tiền</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                </tbody>
+              </table>
+		</div>
+        <div>
+            <label for="">Giảm giá: ... (%)</label>
+        </div>
+       <div>
+        <label for="">Tổng tiền: <span id="total">1000</span> VND</label>
+       </div>
+       
+
+    </div>
 </div>
 @section('js')
     <script>
@@ -96,6 +151,29 @@
 				}
 			);
             })
+
+            $(".order-detail").click(function(){
+                $("#dialog").dialog();
+                var _token = $('input[name="_token"]').val();
+                var value = $(this).attr('data-value');
+                var url = "http://127.0.0.1:8000/admin/cart/order-detail";
+                $.ajax({
+                    url: url,
+                    method: "POST",
+                    dataType: "JSON",
+                    data:{_token:_token,value:value},
+
+                    success:function(data){
+                        $('#dialog').attr('hidden', false);
+                        $("#dialog").dialog();
+                        $("#order-detail > tbody").append(data.html);
+                        $('#total').text(data.total);
+                    }
+                });     
+            });
+
+           
+
         });
 
     </script>

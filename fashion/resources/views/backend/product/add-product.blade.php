@@ -52,8 +52,8 @@
                     <div class="form-group">
                         <label>Trạng thái</label>
                         <select name="status" class="form-control">
-                            <option value="1">Còn hàng</option>
-                            <option value="0">Hết hàng</option>
+                            <option value="1">Kích hoạt</option>
+                            <option value="0">Không kích hoạt</option>
                         </select>
                         {{showErrors($errors,'status')}}
                     </div>

@@ -16,14 +16,14 @@
                   <div class="col-md-8">
                     <div class="form-group">
                         <label>Danh mục</label>
-                        <select name="category" class="form-control">
+                        <select name="category_id" class="form-control">
                             {{getCategory($category,0,'',$product->category_id)}}
                         </select>
                         {{showErrors($errors,'category_id')}}
                     </div>
                     <div class="form-group">
                         <label>Mã sản phẩm</label>
-                        <input type="text" name="code" readonly class="form-control" value="{{$product->code}}">
+                        <input type="text" name="code" class="form-control" value="{{$product->code}}">
                         {{showErrors($errors,'code')}}
                     </div>
                     <div class="form-group">
@@ -51,9 +51,9 @@
                     </div>
                     <div class="form-group">
                         <label>Trạng thái</label>
-                        <select name="status" class="form-control" value="{{$product->status}}">
-                            <option value="1">Còn hàng</option>
-                            <option value="0">Hết hàng</option>
+                        <select name="status" class="form-control">
+                            <option value="1" @if($product->status == 1) selected @endif>Kích hoạt</option>
+                            <option value="0" @if($product->status == 0 || $product->status == null) selected @endif> Chưa kích hoạt</option>
                         </select>
                         {{showErrors($errors,'status')}}
                     </div>
@@ -74,11 +74,19 @@
                         {{showErrors($errors,'image')}}
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <div class="form-group">
                         <label>Thông tin</label>
                         <textarea name="info" style="width: 100%;height: 100px;">{{$product->info}}</textarea>
                         {{showErrors($errors,'info')}}
+                    </div>
+                 </div>
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Ảnh chi tiết sản phẩm</label>
+                        <input name="image1" accept="image/*" type='file' id="imgInp1" class="form-control hidden"/>
+                        <input name="image2" accept="image/*" type='file' id="imgInp2" class="form-control hidden"/>
+                        <input name="image3" accept="image/*" type='file' id="imgInp3" class="form-control hidden"/>
                     </div>
                  </div>
                  <div class="col-md-12">
