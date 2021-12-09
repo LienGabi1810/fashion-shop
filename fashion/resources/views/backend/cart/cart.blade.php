@@ -126,7 +126,8 @@
        <div>
         <label for="">Tổng tiền: <span id="total">1000</span> VND</label>
        </div>
-       
+       <input type='button' id='btn' value='In ra'>
+
 
     </div>
 </div>
@@ -168,6 +169,21 @@
                         $("#dialog").dialog();
                         $("#order-detail > tbody").append(data.html);
                         $('#total').text(data.total);
+                        
+                        $('#btn').on('click', function(){
+                            var divToPrint=document.getElementById('dialog');
+
+                            var newWin=window.open('','Print-Window');
+
+                            newWin.document.open();
+
+                            newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+
+                            newWin.document.close();
+
+                            setTimeout(function(){newWin.close();},10);
+
+                        })
                     }
                 });     
             });

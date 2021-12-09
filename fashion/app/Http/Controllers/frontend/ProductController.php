@@ -40,10 +40,10 @@ class ProductController extends Controller
      * 
      */
     public function getProductDetail($id){
-        $product = $this->productRepo->geDetailProduct($id);
+        $data['product'] = $this->productRepo->geDetailProduct($id);
         
-        $imagesProduct = ImagesProduct::all()->where('product_id',$id)->first();
-        return view('/frontend/product/product-detail',['product' =>$product],['imagesProduct' => $imagesProduct]);
+        $data['imagesProduct'] = ImagesProduct::all()->where('product_id',$id)->first();
+        return view('/frontend/product/product-detail',$data);
     }
 
     public function checkQty($id,$qty){
@@ -54,6 +54,12 @@ class ProductController extends Controller
         else{
             return 'success';
         }
+    }
+
+    public function getProductCategory(Request $r, $category_id){
+        $data['categories'] = $this->categoryRepo->getAllParentCategory();
+        $data['products']  = Product::where('category_id','like',$category_id)->where('quantity','>','0')->where('status','like','1')->get();
+        return view('/frontend/product/product',$data);
     }
 
 }
