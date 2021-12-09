@@ -6,13 +6,13 @@
 	<div class="container" style="padding-top: 75px;">
 		<hr>
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+			<a href="/" class="stext-109 cl8 hov-cl1 trans-04">
 				Home
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
 
-			<a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
-				{{$product->category_id}}
+			<a href="/product" class="stext-109 cl8 hov-cl1 trans-04">
+				Product
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
 
@@ -86,7 +86,7 @@
 							
 							<!--  -->
 							<div class="p-t-33">
-								<div class="flex-w flex-r-m p-b-10">
+								{{-- <div class="flex-w flex-r-m p-b-10">
 									<div class="size-203 flex-c-m respon6">
 										Size
 									</div>
@@ -122,7 +122,7 @@
 											<div class="dropDownSelect2"></div>
 										</div>
 									</div>
-								</div>
+								</div> --}}
 	
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-204 flex-w flex-m respon6-next">

@@ -64,7 +64,13 @@
                                     <img src="/uploads/products/{{$product->image}}" alt="" style="height: 80px; width:80px">
                                 </td>
                                 <td>{{$product->name}}</td>
-                                <td>{{$product->category->name}}</td>
+                                <td>
+                                @if (!empty($product->category->name))
+                                    {{$product->category->name}}
+                                @else
+                                    
+                                @endif
+                                </td>
                                 <td>{{$product->quantity}}</td>
                                 <td>{{$product->status}}</td>
                                 <td>{{$product->price}}</td>

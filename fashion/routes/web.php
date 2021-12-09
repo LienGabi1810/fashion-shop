@@ -14,6 +14,8 @@ use App\Http\Controllers\backend\LoginController;
 use App\Http\Controllers\backend\ShiperController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\CustomerLoginController;
+use App\Http\Controllers\frontend\SearchController;
+use App\Http\Controllers\backend\AdminStatisticalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,7 @@ use App\Http\Controllers\frontend\CustomerLoginController;
 
 //index
 Route::get('/',[IndexController::class, 'getIndex']);
+Route::get('/search',[SearchController::class, 'getSearch']);
 
 //login
 Route::get('/customerlogin',[CustomerLoginController::class,'getLogin']);
@@ -52,6 +55,7 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('', [ProductController::class, 'getProduct']);
     Route::get('detail/{id}',[ProductController::class, 'getProductDetail']);
     Route::get('checkqty/{id}/{qty}',[ProductController::class, 'checkQty']);
+    Route::get('category/{idCategory}',[ProductController::class, 'getProductCategory']);
 });
 
 //cart
@@ -145,6 +149,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'ship'], function () {
         Route::get('/',[ShiperController::class, 'getIndex']);
         Route::post('/changestatusship',[ShiperController::class, 'changeStatus']);
+    
+    });
+
+    //Statistical
+    Route::group(['prefix' => 'statistical'], function () {
+        Route::get('/',[AdminStatisticalController::class, 'getIndex']);
     
     });
 
