@@ -16,6 +16,7 @@ use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\CustomerLoginController;
 use App\Http\Controllers\frontend\SearchController;
 use App\Http\Controllers\backend\AdminStatisticalController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -154,10 +155,16 @@ Route::group(['prefix' => 'admin'], function () {
 
     //Statistical
     Route::group(['prefix' => 'statistical'], function () {
-        Route::get('/',[AdminStatisticalController::class, 'getIndex']);
+        Route::get('/',[CustomerController::class, 'getIndex']);
     
     });
 
 });
 
-
+//customer
+Route::group(['prefix' => 'customer'], function () {
+    Route::get('/',[CustomerController::class, 'getIndex']);
+    Route::post('/destroy',[CustomerController::class, 'destroyCart']);
+    Route::get('/info',[CustomerController::class, 'getInfo']);
+    Route::post('/info',[CustomerController::class, 'postInfo']);
+});
