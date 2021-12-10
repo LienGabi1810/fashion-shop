@@ -11,7 +11,7 @@
 					<div class="right-top-bar flex-w h-full">
 						@if(Auth::guard('customer')->user())
 						<div class="flex-c-m trans-04 p-lr-25">
-							{{ Auth::guard('customer')->user()->email}}
+							<a style="display: contents" href="/customer">{{ Auth::guard('customer')->user()->email}}</a>
 						</div>
 						<a class="flex-c-m trans-04 p-lr-25" href="{{ url('customerlogout') }}">Logout</a>
 						@else

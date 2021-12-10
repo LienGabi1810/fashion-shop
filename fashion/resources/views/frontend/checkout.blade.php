@@ -23,17 +23,17 @@
 			<div class="row">
 				<div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="name" placeholder="Tên" aria-label="Username" aria-describedby="basic-addon1" value=@if(Auth::guard('customer')->user()) {{Auth::guard('customer')->user()->username}} @endif>
+                        <input type="text" class="form-control" name="name" placeholder="Tên" aria-label="Username" aria-describedby="basic-addon1" value='@if(Auth::guard('customer')->user()) {{Auth::guard('customer')->user()->username}} @endif'>
                     </div>
                  </div>
                  <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="phone" placeholder="Số điện thoại" aria-label="Username" aria-describedby="basic-addon1" value=@if(Auth::guard('customer')->user()) {{Auth::guard('customer')->user()->phone}} @endif>
+                        <input type="text" class="form-control" name="phone" placeholder="Số điện thoại" aria-label="Username" aria-describedby="basic-addon1" value='@if(Auth::guard('customer')->user()) {{Auth::guard('customer')->user()->phone}} @endif'>
                     </div>
                  </div>
                  <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="address" placeholder="Địa chỉ" aria-label="Username" aria-describedby="basic-addon1" value=@if(Auth::guard('customer')->user()) {{Auth::guard('customer')->user()->address}} @endif>
+                        <input type="text" class="form-control" name="address" placeholder="Địa chỉ" aria-label="Username" aria-describedby="basic-addon1" value='@if(Auth::guard('customer')->user()) {{Auth::guard('customer')->user()->address}} @endif'>
                     </div>
                  </div>
                  <div class="col-md-6">
