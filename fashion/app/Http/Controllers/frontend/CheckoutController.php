@@ -4,9 +4,11 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Order_Detail;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Cart;
+use Mail;
 
 class CheckoutController extends Controller
 {
@@ -57,6 +59,21 @@ class CheckoutController extends Controller
         $order->ship = '-1';
         $order->save();
 
+        foreach(Cart::content() as $item){
+            $orderDetail = new Order_Detail();
+            $orderDetail->order_id = $order->id;
+            $orderDetail->product_id = $item->id;
+            $orderDetail->qty = $item->qty;
+            $orderDetail->product_name = $item->name;
+            $orderDetail->price = $item->price;
+            $orderDetail->customer_name = $request->name;
+            $orderDetail->save();
+            $updateProduct = Product::find($item->id);
+            $updateProduct->qty_sell =  $updateProduct->qty_sell + $item->qty;
+            $updateProduct->total_sell =  $item->price * ($updateProduct->qty_sell + $item->qty);
+            $updateProduct->save();
+        }
+
         $array = json_decode(json_encode(Cart::content()), True);
         foreach($array as $value){
             $product = Product::find($value['id']);
@@ -76,30 +93,30 @@ class CheckoutController extends Controller
         //         $order->year = now()->year;
         //         $order->save();
         //    }
-        //    $info1 = '';
-        //    foreach(cart::content() as $row)
-        //    {
-        //        $prdname = $row->name;
-        //        $price = $row->price;
-        //        $qty = $row->qty;
-        //        $info1 = $info1.$row->qty.' '.$row->name.': '.($row->qty*$row->price).'||';
-        //    }
-        //    $data = array(
-        //     'shop' => 'Nông nghiệp 24h kính chào quý khách.',
-        //     'id' =>$customer->id,
-        //     'name' => $request->name,
-        //     'email'=> $request->email,
-        //     'phone' => $request->phone,
-        //     'address' => $request->address,
-        //     'prdname' => $prdname,
-        //     'info' => $info1,
-        //     'tongtien' =>cart::total()
-        // );
-        // Mail::send('q_web.mail', $data, function ($message) use($request) {
-        //         $message->from('tuaphan7396@gmail.com', 'admin');
-        //         $message->to($request->email, $request->name);
-        //         $message->subject('Xác nhận đơn hàng');
-        // });
+           $info1 = '';
+           foreach(cart::content() as $row)
+           {
+               $prdname = $row->name;
+               $price = $row->price;
+               $qty = $row->qty;
+               $info1 = $info1.$row->qty.' '.$row->name.': '.($row->qty*$row->price).'||';
+           }
+           $data = array(
+            'shop' => 'Liên Fashion kính chào quý khách.',
+            //'id' =>$customer->id,
+            'name' => $request->name,
+            'email'=> $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'prdname' => $prdname,
+            'info' => $info1,
+            'tongtien' =>cart::total()
+        );
+        Mail::send('frontend.mail', $data, function ($message) use($request) {
+                $message->from('nguyenthihonglien1098@gmail.com', 'admin');
+                $message->to($request->email, $request->name);
+                $message->subject('Xác nhận đơn hàng');
+        });
         Cart::Destroy();
         return Redirect('/cart')->with('thongbao','Bạn đã đặt hàng thành công');
     }

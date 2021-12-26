@@ -5,7 +5,7 @@
                 @if (Auth::user()->role == 1 || Auth::user()->role == 2)
                 <a class="nav-link" href="/admin">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Admin
+                    Tổng quan
                 </a>
                
                 @endif
@@ -57,7 +57,7 @@
                         <a class="nav-link" href="/admin/statistical">Thống kê</a>
                     </nav>
                     <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                        <a class="nav-link" href="">Báo cáo</a>
+                        <a class="nav-link" href="/admin/warehouse">Báo cáo</a>
                     </nav>
                 </div>
                

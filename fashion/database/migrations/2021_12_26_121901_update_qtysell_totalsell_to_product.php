@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateProductTableTimestamp extends Migration
+class UpdateQtysellTotalsellToProduct extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class UpdateProductTableTimestamp extends Migration
     public function up()
     {
         Schema::table('product', function (Blueprint $table) {
-            $table->timestamps()->nullable()->change();
+            $table->string('qty_sell')->nullable()->default(0)->change();
+            $table->string('total_sell')->nullable()->default(0)->change();
         });
     }
 
@@ -25,6 +26,8 @@ class UpdateProductTableTimestamp extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('product', function (Blueprint $table) {
+            //
+        });
     }
 }
