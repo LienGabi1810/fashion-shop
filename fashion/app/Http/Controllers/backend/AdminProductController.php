@@ -61,6 +61,8 @@ class AdminProductController extends Controller
             $filee3->move('uploads/products',$fileName3);
         }
         
+       
+
         $imagesProduct = new ImagesProduct();
         $imagesProduct->images = '1';
         $imagesProduct->product_id = $products->id;
@@ -73,8 +75,9 @@ class AdminProductController extends Controller
 
     public function getEditProduct($id){
         $product = $this->productRepo->find($id);
+        $imageProduct = ImagesProduct::all()->where('product_id','like',$id)->take(1);
         $category = Category::all();
-        return view('/backend/product/edit-product',['product' =>$product,'category'=>$category]);
+        return view('/backend/product/edit-product',['product' =>$product,'category'=>$category,'imageProducts'=>$imageProduct]);
     }
 
     public function postEditProduct(EditProductRequest $r, $id){
@@ -101,7 +104,17 @@ class AdminProductController extends Controller
             $filee3->move('uploads/products',$fileName3);
         }
         
-        $imagesProduct = new ImagesProduct();
+        if(empty($fileName1)){
+            $fileName1 = $r->image1;
+        }
+        if(empty($fileName2)){
+            $fileName2 = $r->image2;
+        }
+        if(empty($fileName3)){
+            $fileName3 = $r->image3;
+        }
+
+        $imagesProduct = ImagesProduct::where('product_id',$id)->first();
         $imagesProduct->images = '1';
         $imagesProduct->product_id = $id;
         $imagesProduct->images1 = $fileName1;

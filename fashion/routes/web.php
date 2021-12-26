@@ -16,6 +16,7 @@ use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\CustomerLoginController;
 use App\Http\Controllers\frontend\SearchController;
 use App\Http\Controllers\backend\AdminStatisticalController;
+use App\Http\Controllers\backend\WarehouseController;
 use App\Http\Controllers\CustomerController;
 
 /*
@@ -155,7 +156,14 @@ Route::group(['prefix' => 'admin'], function () {
 
     //Statistical
     Route::group(['prefix' => 'statistical'], function () {
-        Route::get('/',[CustomerController::class, 'getIndex']);
+        Route::get('/',[AdminStatisticalController::class, 'getIndex']);
+    
+    });
+
+    //Statistical
+    Route::group(['prefix' => 'warehouse'], function () {
+        Route::get('/',[WarehouseController::class, 'getIndex']);
+        Route::get('/{value}',[WarehouseController::class, 'getWarehouse']);
     
     });
 

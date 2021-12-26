@@ -84,9 +84,15 @@
                  <div class="col-md-4">
                     <div class="form-group">
                         <label>Ảnh chi tiết sản phẩm</label>
-                        <input name="image1" accept="image/*" type='file' id="imgInp1" class="form-control hidden"/>
-                        <input name="image2" accept="image/*" type='file' id="imgInp2" class="form-control hidden"/>
-                        <input name="image3" accept="image/*" type='file' id="imgInp3" class="form-control hidden"/>
+                        <input name="image1" accept="image/*" type='file' id="imgInp1" class="form-control hidden" />
+                        <input name="image2" accept="image/*" type='file' id="imgInp2" class="form-control hidden" />
+                        <input name="image3" accept="image/*" type='file' id="imgInp3" class="form-control hidden" />
+                        @foreach ($imageProducts as $imageProduct)
+                        <input name="image1" type='hidden'  class="form-control hidden" value="{{$imageProduct->images1}}"/>
+                        <input name="image2" type='hidden'  class="form-control hidden" value="{{$imageProduct->images2}}"/>
+                        <input name="image3" type='hidden'  class="form-control hidden" value="{{$imageProduct->images3}}"/>
+                        @endforeach
+                        
                     </div>
                  </div>
                  <div class="col-md-12">

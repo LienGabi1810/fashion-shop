@@ -11,7 +11,7 @@
                     <div class="card bg-primary text-white mb-4">
                         <div class="card-body">Tổng doanh thu</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <p>123</p>
+                            <p>756,142,000</p>
                             <div class="small text-white"></div>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                     <div class="card bg-warning text-white mb-4">
                         <div class="card-body">Tổng đơn hàng</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <p>123</p>
+                            <p>156</p>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                     <div class="card bg-success text-white mb-4">
                         <div class="card-body">Tổng khách hàng</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <p>123</p>
+                            <p>15,000</p>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                     <div class="card bg-danger text-white mb-4">
                         <div class="card-body">Tổng số lượng sản phẩm</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <p>123</p>
+                            <p>1050 </p>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -50,6 +50,7 @@
                 </div>
             @endif
             <div class="row">
+                @csrf
                 <div class="col-xl-12" style="margin-top: 20px;">
                     <div class="card mb-4">
                         <div class="card-header">
@@ -85,12 +86,11 @@
        function getChartDonut(){
            var _token = $('input[name="_token"]').val();
            var url = "http://127.0.0.1:8000/admin/chartdonut";
-           var data1 = [
+           var data = [
                 {label: "Download Sales", value: 12},
                 {label: "In-Store Sales", value: 30},
                 {label: "Mail-Order Sales", value: 20}
             ];
-            console.log(data1);
            $.ajax({
                url: url,
                method: "POST",
