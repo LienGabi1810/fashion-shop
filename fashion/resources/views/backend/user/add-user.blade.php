@@ -54,7 +54,7 @@
                         <select name="role" class="form-control">
                             <option value="1">Admin</option>
                             <option value="2">Manager</option>
-                            <option value="3">Shiper</option>
+                            <option value="3">Staff</option>
                         </select>
                         {{showErrors($errors,'role')}}
                     </div>

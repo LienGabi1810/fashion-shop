@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <base href="/backend/">
-        <title>Dashboard - SB Admin</title>
+        <title>Thông tin của bạn</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
         <link href="css/styles.css" rel="stylesheet" />
@@ -25,13 +25,13 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3 hidden" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand ps-3 hidden" href="/">Lien Fashion</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             
             <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="display:none">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -50,7 +50,7 @@
                         <div class="nav">
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                You
+                                Thông tin của bạn
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -73,6 +73,7 @@
                                 <i class="fas fa-table me-1"></i>
                                 Danh sách đơn hàng của bạn
                             </div>
+                            @csrf
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     @csrf
@@ -197,7 +198,8 @@
                 $("#dialog").dialog();
                 var _token = $('input[name="_token"]').val();
                 var value = $(this).attr('data-value');
-                var url = "http://127.0.0.1:8000/admin/cart/order-detail";
+                console.log(value);
+                var url = "http://127.0.0.1:8000/customer/order-detail1";
                 $.ajax({
                     url: url,
                     method: "POST",

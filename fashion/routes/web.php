@@ -175,4 +175,5 @@ Route::group(['prefix' => 'customer'], function () {
     Route::post('/destroy',[CustomerController::class, 'destroyCart']);
     Route::get('/info',[CustomerController::class, 'getInfo']);
     Route::post('/info',[CustomerController::class, 'postInfo']);
+    Route::post('order-detail1',  [AdminCartController::class, 'orderDetail']); 
 });

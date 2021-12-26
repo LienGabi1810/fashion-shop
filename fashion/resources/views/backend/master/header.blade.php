@@ -17,7 +17,7 @@
             {{auth()->user()->email}}
         </button>
         <a href="/logout"><button class="btn btn-secondary" type="text" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Logout
+            Đăng xuất
         </button></a>
     </div>
     @endif

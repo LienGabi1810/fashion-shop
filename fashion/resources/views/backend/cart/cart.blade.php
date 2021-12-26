@@ -49,7 +49,7 @@
                                 <td> 
                                     <button class="order-detail" data-value = {{$item->id}}>Xem chi tiết</button>
                                 </td>
-                                <td>{{$item->total}}</td>
+                                <td>{{number_format($item->total, 0,'', ',')}}</td> 
                                 <td>
                                     <select>
                                         <option value="0" @if($item->status_order==0)selected @endif>Đang chờ</option>    
