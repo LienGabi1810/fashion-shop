@@ -49,7 +49,8 @@
                                 <td>{{$item->total}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>
-                                    <select class="change-status" @if($item->status_order==2||$item->status_order==3) disabled @endif>
+                                    <select class="change-status" @if($item->status_order==-1|| $item->status_order==2 || $item->status_order==3) disabled @endif>
+                                        <option value="-1" @if($item->status_order==-1)selected  @endif>Hủy đơn</option>    
                                         <option value="0" @if($item->status_order==0)selected @endif @if($item->status_order==1) disabled @endif>Đang chờ</option>    
                                         <option value="1" @if($item->status_order==1)selected @endif>Đang giao</option>    
                                         <option value="2" @if($item->status_order==2)selected @endif>Thành công</option>    
