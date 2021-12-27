@@ -51,11 +51,11 @@
                                 </td>
                                 <td>{{$item->total}}</td>
                                 <td>
-                                    <select>
-                                        <option value="0" @if($item->status_order==0)selected @endif>Đang chờ</option>    
-                                        <option value="1" @if($item->status_order==1)selected @endif>Đang giao</option>    
-                                        <option value="2" @if($item->status_order==2)selected @endif>Thành công</option>    
-                                        <option value="3" @if($item->status_order==3)selected @endif>Thất bại</option>    
+                                    <select class="change-status">
+                                        <option value="0" @if($item->status_order==0)selected @endif @if($item->status_order==1 || $item->status_order==2 || $item->status_order==3) disabled @endif>Đang chờ</option>    
+                                        <option value="1" @if($item->status_order==1)selected @endif @if($item->status_order==2 || $item->status_order==3) disabled @endif>Đang giao</option>    
+                                        <option value="2" @if($item->status_order==2)selected @endif @if( $item->status_order==3) disabled @endif>Thành công</option>    
+                                        <option value="3" @if($item->status_order==3)selected @endif @if($item->status_order==2) disabled @endif>Thất bại</option>        
                                     </select>
                                 </td>
                                 <td>{{$item->created_at}}</td>
@@ -188,7 +188,24 @@
                 });     
             });
 
-           
+            $('.change-status').on('change', function(){
+                var value = $(this).find('option:selected').val();
+                var id = $(this).parent().parent().attr('data-id');
+                $.get("/admin/cart/changestatus/"+value+"/"+id,
+				function(data)
+				{
+					if(data=='success'){
+						alert('cập nhật thành công');
+                        window.location.reload();
+					}
+					else
+					{
+						alert('Cập nhật thất bại!');
+                        window.location.reload();
+					}
+				}
+			);
+            })
 
         });
 
