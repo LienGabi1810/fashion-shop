@@ -51,7 +51,8 @@
                                 </td>
                                 <td>{{$item->total}}</td>
                                 <td>
-                                    <select class="change-status">
+                                    <select class="change-status" @if($item->status_order==-1|| $item->status_order==2 || $item->status_order==3) disabled @endif>
+                                        <option value="-1" @if($item->status_order==-1)selected  @endif>Hủy đơn</option>    
                                         <option value="0" @if($item->status_order==0)selected @endif @if($item->status_order==1 || $item->status_order==2 || $item->status_order==3) disabled @endif>Đang chờ</option>    
                                         <option value="1" @if($item->status_order==1)selected @endif @if($item->status_order==2 || $item->status_order==3) disabled @endif>Đang giao</option>    
                                         <option value="2" @if($item->status_order==2)selected @endif @if( $item->status_order==3) disabled @endif>Thành công</option>    
@@ -60,7 +61,7 @@
                                 </td>
                                 <td>{{$item->created_at}}</td>
                                 <th>
-                                    <select class="change-to-ship">
+                                    <select class="change-to-ship" @if($item->status_order==-1|| $item->status_order==2 || $item->status_order==3) disabled @endif>
                                         <option value="-1">Chọn</option>      
                                         <option class="change-to-post-office" value="0" @if($item->ship==0)selected @endif>Bưu Điện</option>        
                                         <option class="change-to-ship" value="1" @if($item->ship==1)selected @endif>Ship</option>        

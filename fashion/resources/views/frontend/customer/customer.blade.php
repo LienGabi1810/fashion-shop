@@ -100,7 +100,7 @@
                                             <td><button class="order-detail" data-value = {{$item->id}}>Xem chi tiết</button></td>
                                             <td>
                                                 <select @if($item->status_order==-1|| $item->status_order==1|| $item->status_order==2 || $item->status_order==3) disabled @endif class="destroy-order">
-                                                    <option value="-1" @if($item->status_order==0)selected  @endif>Hủy đơn</option>    
+                                                    <option value="-1" @if($item->status_order==-1)selected  @endif>Hủy đơn</option>    
                                                     <option value="0" @if($item->status_order==0)selected  @endif @if($item->status_order==-1)disabled  @endif>Đang chờ</option>    
                                                     <option value="1" @if($item->status_order==1)selected @endif @if($item->status_order==0 || $item->status_order==-1)disabled  @endif>Đang giao</option>    
                                                     <option value="2" @if($item->status_order==2)selected @endif @if($item->status_order==0 ||$item->status_order==-1)disabled  @endif>Thành công</option>    
