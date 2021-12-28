@@ -9,4 +9,14 @@ class Order_Detail extends Model
 {
     use HasFactory;
     protected $table="order_detail";
+
+    public function order()
+    {
+        return $this->hasOne('App\models\Order_Detail', 'order_id', 'id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo('App\models\Customer', 'customer_id', 'id');
+    }
 }

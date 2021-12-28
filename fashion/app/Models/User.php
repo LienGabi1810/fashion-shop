@@ -13,4 +13,9 @@ class User extends Authenticatable
     protected $table="users";
     protected $fillable = ['name','phone','address','email','password','gender','role'];
     public $timestamps = true;
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

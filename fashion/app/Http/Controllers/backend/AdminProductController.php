@@ -27,6 +27,9 @@ class AdminProductController extends Controller
     }
 
     public function getProduct(){
+        // $product = Category::find(9)->name;
+        // $Category = Product::where('status', '1')->Category;
+        // dd($Category);
         //$products = $this->productRepo->getAll();
         $data['products'] = Product::paginate(10);
         return view('/backend/product/product',$data);
