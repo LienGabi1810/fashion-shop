@@ -22,7 +22,7 @@ class WarehouseController extends Controller
             $data['products'] = Product::orderBy('created_at','DESC')->paginate(10);
             $label = 'Sản phẩm mới nhất';
         }elseif($value=='selling'){
-            $data['products'] = Product::where('qty_sell','>', 0)->paginate(10);
+            $data['products'] = Product::where('qty_sell','>', 0)->orderBy('qty_sell','DESC')->paginate(10);
             $label = 'Sản phẩm bán chạy';
         }elseif($value=='notselling'){
             $data['products'] = Product::where('qty_sell','like', 0)->orWhereNull('qty_sell')->paginate(10);

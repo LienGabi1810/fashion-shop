@@ -237,7 +237,7 @@
 
 			<div class="row isotope-grid">
 				@foreach ($products as $product)
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item @if(!empty($product->category->tag))  @else  @endif ">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item @if(!empty($product->category->tag)) {{$product->category->tag}}  @else  @endif ">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">

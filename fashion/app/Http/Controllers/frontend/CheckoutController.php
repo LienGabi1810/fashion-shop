@@ -58,7 +58,7 @@ class CheckoutController extends Controller
         $order->true_false = '0';
         $order->ship = '-1';
         $order->save();
-
+        
         foreach(Cart::content() as $item){
             $orderDetail = new Order_Detail();
             $orderDetail->order_id = $order->id;
@@ -70,7 +70,8 @@ class CheckoutController extends Controller
             $orderDetail->save();
             $updateProduct = Product::find($item->id);
             $updateProduct->qty_sell =  $updateProduct->qty_sell + $item->qty;
-            $updateProduct->total_sell =  $item->price * ($updateProduct->qty_sell + $item->qty);
+            $qtynew = $updateProduct->qty_sell;
+            $updateProduct->total_sell =  $item->price * $qtynew;
             $updateProduct->save();
         }
 
