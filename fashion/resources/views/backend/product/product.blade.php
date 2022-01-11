@@ -18,13 +18,13 @@
                 @csrf
                 <input type="file" name="file" class="form-control">
                 <br>
-                <button class="btn btn-success">Import Product Data</button>
-                <a class="btn btn-warning" href="/admin/product/export">Export Product Data</a>
+                <button class="btn btn-success">Import sản phẩm</button>
+                <a class="btn btn-warning" href="/admin/product/export">Export sản phẩm</a>
             </form>
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
-                    DataTable Example
+                    Danh sách sản phẩm
                 </div>
                 <div class="card-body">
                     <table id="datatablesSimple">

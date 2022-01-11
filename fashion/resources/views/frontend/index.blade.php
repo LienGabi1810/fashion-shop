@@ -142,7 +142,7 @@
 							</a>
 
 							<span class="stext-105 cl3">
-								${{number_format($newProduct->price, 0,'', ',')}}
+								{{number_format($newProduct->price, 0,'', ',')}} VND
 							</span>
 						</div>
 
@@ -198,7 +198,7 @@
 							</a>
 
 							<span class="stext-105 cl3">
-								${{number_format($hotProduct->price, 0,'', ',')}}
+								{{number_format($hotProduct->price, 0,'', ',')}} VND
 							</span>
 						</div>
 

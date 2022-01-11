@@ -59,7 +59,7 @@ class CheckoutController extends Controller
         $order->true_false = '0';
         $order->ship = '-1';
         $order->save();
-
+        
         foreach(Cart::content() as $item){
             $orderDetail = new Order_Detail();
             $orderDetail->order_id = $order->id;

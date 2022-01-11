@@ -5,9 +5,9 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Category</h1>
+            <h1 class="mt-4">Danh mục</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Category</li>
+                <li class="breadcrumb-item active">Danh mục</li>
             </ol>
             @if (session('thongbao'))
             <div class="alert bg-success" role="alert">
@@ -17,7 +17,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
-                    Category List
+                    Danh sách danh mục
                 </div>
                 <div style="display: flex">
                     <div class="col-md-5" style="padding-right: 100px">
@@ -27,7 +27,7 @@
                             <div style="margin-bottom: 20px" class="form-group">
                                 <label for="">Danh mục cha:</label>
                                 <select class="form-control" name="parent_id" id="">
-                                    <option value="0">----ROOT----</option>
+                                    <option value="0">----Danh mục gốc----</option>
                                     {{getCategory($category,0,'',0)}}
                                 </select>
                             </div>

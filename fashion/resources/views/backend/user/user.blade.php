@@ -56,7 +56,7 @@
                                     @elseif($user->role == 2)
                                     Manager
                                     @elseif($user->role == 3)
-                                    Shiper
+                                    Staff
                                     @endif
                                 </td>
                                 <td>
