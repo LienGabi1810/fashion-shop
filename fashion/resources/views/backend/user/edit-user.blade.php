@@ -54,7 +54,7 @@
                         <select name="role" class="form-control">
                             <option @if ($user->role == 1) selected @endif value="1">Admin</option>
                             <option @if ($user->role == 2) selected @endif value="2">Manager</option>
-                            <option @if ($user->role == 3) selected @endif value="3">Shiper</option>
+                            <option @if ($user->role == 3) selected @endif value="3">Staff</option>
                         </select>
                         {{showErrors($errors,'role')}}
                     </div>

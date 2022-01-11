@@ -49,7 +49,7 @@
                                 <td> 
                                     <button class="order-detail" data-value = {{$item->id}}>Xem chi tiết</button>
                                 </td>
-                                <td>{{$item->total}}</td>
+                                <td>{{number_format($item->total, 0,'', ',')}}</td> 
                                 <td>
                                     <select class="change-status" @if($item->status_order==-1|| $item->status_order==2 || $item->status_order==3) disabled @endif>
                                         <option value="-1" @if($item->status_order==-1)selected  @endif>Hủy đơn</option>    
