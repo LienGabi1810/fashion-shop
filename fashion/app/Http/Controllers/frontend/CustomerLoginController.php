@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Customer;
@@ -14,7 +16,7 @@ class CustomerLoginController extends Controller
         return view('frontend.login');
     }
 
-    public function postLogin(Request $r){
+    public function postLogin(LoginRequest $r){
         $login = [
             'username' => $r->username,
             'password' => $r->password
@@ -23,7 +25,7 @@ class CustomerLoginController extends Controller
             $r->session()->regenerate();
             return redirect('/');
         } else {
-            return back()->with('thongbao', 'Email hoặc Password không chính xác');
+            return back()->with('thongbao', 'Username hoặc Password không chính xác');
         }
     }   
 
@@ -31,7 +33,7 @@ class CustomerLoginController extends Controller
         return view('frontend.register');
     }
 
-    public function postRegister(Request $r){
+    public function postRegister(RegisterRequest $r){
         if($r->password != $r->repeatpassword){
             return back()->with('thongbao','Nhập lại mật khẩu không chính xác');
         }else{

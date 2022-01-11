@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Order_Detail;
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Cart;
@@ -68,11 +69,11 @@ class CheckoutController extends Controller
             $orderDetail->price = $item->price;
             $orderDetail->customer_name = $request->name;
             $orderDetail->save();
-            $updateProduct = Product::find($item->id);
-            $updateProduct->qty_sell =  $updateProduct->qty_sell + $item->qty;
-            $qtynew = $updateProduct->qty_sell;
-            $updateProduct->total_sell =  $item->price * $qtynew;
-            $updateProduct->save();
+            $orderProduct = new OrderProduct();
+            $orderProduct->order_id = $order->id;
+            $orderProduct->product_id = $item->id;
+            $orderProduct->qty_prd = $item->qty;
+            $orderProduct->save();
         }
 
         $array = json_decode(json_encode(Cart::content()), True);

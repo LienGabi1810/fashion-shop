@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,7 +22,9 @@ class AdminCartController extends Controller
     }
 
     public function getCartShip(){
-        $data['order'] = Order::all()->where('ship','like',1);
+        //$data['order'] = Order::all()->where('ship','like',1);
+        $data['order'] = Order::where('ship', 'like', 1)->get();
+        //$data['order'] = $data['order']->paginate(10);
         $data['ship'] = User::all()->where('role','like',3);
         return view('backend/cart/order-for-ship',$data);
     }
@@ -51,6 +54,19 @@ class AdminCartController extends Controller
         $order = Order::find($id);
         $order->status_order = $value;
         $order->save();
+        if($value == '2'){
+            $orderProduct = OrderProduct::where('order_id','like',$id)->get();
+        }
+        foreach($orderProduct as $value){
+            $product = Product::find($value['product_id']);
+            $product->qty_sell =  $product->qty_sell + $value['qty_prd'];
+            $product->total_sell =  $product->price * ($product->qty_sell);
+            $product->save();
+        }
+        // $updateProduct = Product::find($item->id);
+            // $updateProduct->qty_sell =  $updateProduct->qty_sell + $item->qty;
+            // $updateProduct->total_sell =  $item->price * ($updateProduct->qty_sell + $item->qty);
+            // $updateProduct->save();
         return 'success';
     }
 
