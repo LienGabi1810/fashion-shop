@@ -8,6 +8,7 @@ use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminCartController extends Controller
 {
@@ -22,9 +23,8 @@ class AdminCartController extends Controller
     }
 
     public function getCartShip(){
-        //$data['order'] = Order::all()->where('ship','like',1);
-        $data['order'] = Order::where('ship', 'like', 1)->get();
-        //$data['order'] = $data['order']->paginate(10);
+        $data['order'] = Order::where('ship','like',1)->paginate(10);
+        //dd($data['order']);
         $data['ship'] = User::all()->where('role','like',3);
         return view('backend/cart/order-for-ship',$data);
     }

@@ -7,7 +7,7 @@
             <h1 class="mt-4">Báo cáo tồn kho @if (!empty(session('thongbao')))- {{session('thongbao')}}@endif</h1>
             <ol class="breadcrumb mb-4">
                 <select id="warehouse">
-                    <option value="">Tất cả sản Phẩm</option>
+                    <option value="all">Tất cả sản Phẩm</option>
                     <option value="outofstock">Sản phẩm hết hàng</option>
                     <option value="new">Sản phẩm mới nhất</option>
                     <option value="selling">Sản phẩm bán chạy</option>
@@ -115,6 +115,7 @@
             window.location.href = url;
         })
         var pathname = window.location.pathname;
+        console.log(pathname);
         if(pathname == '/admin/warehouse/selling'){
             $("#warehouse").val("selling");
         }
