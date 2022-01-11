@@ -92,6 +92,9 @@ Route::post('/admin/chart30day',[AdminController::class, 'getChart30day']);
 Route::post('/admin/lastmonth',[AdminController::class, 'getLastMonth']);
 Route::post('/admin/oneyear',[AdminController::class, 'getOneYear']);
 Route::post('/admin/chartdonut',[AdminController::class, 'getChartDonut']);
+Route::post('/admin/today',[AdminController::class, 'getChartDonut']);
+Route::post('/admin/month',[AdminController::class, 'getChartDonutMonth']);
+Route::post('/admin/year',[AdminController::class, 'getChartDonutYear']);
 
 
 //login

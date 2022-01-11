@@ -186,26 +186,29 @@ a{color:inherit;text-decoration:none}
                     <div class="sign-up-htm">
                         <div class="group">
                             <label for="user" class="label">Username</label>
-                            <input id="user" name="username" type="text" class="input" autocomplete="off">
+                            <input id="user" name="username" type="text" class="input" autocomplete="new-password">
+							{{showErrors($errors,'username')}}
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Password</label>
-                            <input id="pass" name="password" type="password" class="input" data-type="password" autocomplete="off">
+                            <input id="pass" name="password" type="password" class="input" data-type="password" autocomplete="new-password">
+							{{showErrors($errors,'password')}}
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Repeat Password</label>
-                            <input id="pass" name="repeatpassword" type="password" class="input" data-type="password" autocomplete="off">
+                            <input id="pass" name="repeatpassword" type="password" class="input" data-type="password" autocomplete="new-password">
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Email Address</label>
-                            <input id="pass" name="email" type="text" class="input" autocomplete="off">
+                            <input id="pass" name="email" type="text" class="input" autocomplete="new-password">
+							{{showErrors($errors,'email')}}
                         </div>
                         <div class="group">
                             <input type="submit" class="button" value="Sign Up">
                         </div>
                         <div class="hr"></div>
                         <div class="foot-lnk">
-                            <label for="tab-1">Already Member?</a>
+                            <a href="/customerlogin">Already Member?</a>
                         </div>
                     </div>
                 </form>

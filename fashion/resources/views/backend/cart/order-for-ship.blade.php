@@ -72,6 +72,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{-- <div align='right'>
+                        {{$order->links("pagination::bootstrap-4")}}
+                    </div> --}}
                 </div>
             </div>
         </div>

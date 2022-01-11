@@ -19,7 +19,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
     public function getHotProduct()
     {
-        return $this->model->where('is_hightlight','like','1')->where('status','like','1')->where('quantity','>',0)->take(8)->get();
+        return $this->model->where('is_hightlight','like','1')->where('status','like','1')->where('quantity','>',0)->orderBy('created_at','DESC')->take(8)->get();
     }
 
     public function geDetailProduct($id)

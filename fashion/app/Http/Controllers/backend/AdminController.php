@@ -190,6 +190,41 @@ class AdminController extends Controller
     public function getChartDonut(){
        
         $year_n = Carbon::now()->format('Y');
+        $month_n = Carbon::now()->format('d');
+        
+        $totalOrder = Order::whereDate('created_at',$month_n)->get();
+        $totalOrderSuccess = Order::where('status_order','2')->whereDate('created_at',$month_n)->get();
+        $totalOrderFail = Order::where('status_order','3')->whereDate('created_at',$month_n)->get();
+        $totalOrderWaiting = Order::where('status_order','0')->whereDate('created_at',$month_n)->get();
+        $totalOrderShipping = Order::where('status_order','1')->whereDate('created_at',$month_n)->get();
+        $countTotalOrder =  count($totalOrder);
+        $counttotalOrderSuccess =  count($totalOrderSuccess);
+        $counttotalOrderFail =  count($totalOrderFail);
+        $counttotalOrderWaiting =  count($totalOrderWaiting);
+        $counttotalOrderShipping =  count($totalOrderShipping);
+
+        $arr = [
+            'Tổng đơn hàng' => $countTotalOrder,
+            'Tổng đơn hàng thành công' => $counttotalOrderSuccess,
+            'Tổng đơn hàng thất bại' =>$counttotalOrderFail,
+            'Tổng đơn hàng đang chờ' =>$counttotalOrderWaiting,
+            'Tổng đơn hàng đang vận chuyển' =>$counttotalOrderShipping
+        ];
+        $i = 0;
+        foreach($arr as $key => $val){
+            $data[$i] = array(
+                'label' => $key,
+                'value' => $val,
+            );
+            $i++;
+        }
+        
+        echo json_encode($data);
+    }
+
+    public function getChartDonutMonth(){
+       
+        $year_n = Carbon::now()->format('Y');
         $month_n = Carbon::now()->format('m');
         
         $totalOrder = Order::whereMonth('created_at',$month_n)->get();
@@ -197,6 +232,41 @@ class AdminController extends Controller
         $totalOrderFail = Order::where('status_order','3')->whereMonth('created_at',$month_n)->get();
         $totalOrderWaiting = Order::where('status_order','0')->whereMonth('created_at',$month_n)->get();
         $totalOrderShipping = Order::where('status_order','1')->whereMonth('created_at',$month_n)->get();
+        $countTotalOrder =  count($totalOrder);
+        $counttotalOrderSuccess =  count($totalOrderSuccess);
+        $counttotalOrderFail =  count($totalOrderFail);
+        $counttotalOrderWaiting =  count($totalOrderWaiting);
+        $counttotalOrderShipping =  count($totalOrderShipping);
+
+        $arr = [
+            'Tổng đơn hàng' => $countTotalOrder,
+            'Tổng đơn hàng thành công' => $counttotalOrderSuccess,
+            'Tổng đơn hàng thất bại' =>$counttotalOrderFail,
+            'Tổng đơn hàng đang chờ' =>$counttotalOrderWaiting,
+            'Tổng đơn hàng đang vận chuyển' =>$counttotalOrderShipping
+        ];
+        $i = 0;
+        foreach($arr as $key => $val){
+            $data[$i] = array(
+                'label' => $key,
+                'value' => $val,
+            );
+            $i++;
+        }
+        
+        echo json_encode($data);
+    }
+
+    public function getChartDonutYear(){
+       
+        $year_n = Carbon::now()->format('Y');
+        $month_n = Carbon::now()->format('Y');
+        
+        $totalOrder = Order::whereYear('created_at',$month_n)->get();
+        $totalOrderSuccess = Order::where('status_order','2')->whereYear('created_at',$month_n)->get();
+        $totalOrderFail = Order::where('status_order','3')->whereYear('created_at',$month_n)->get();
+        $totalOrderWaiting = Order::where('status_order','0')->whereYear('created_at',$month_n)->get();
+        $totalOrderShipping = Order::where('status_order','1')->whereYear('created_at',$month_n)->get();
         $countTotalOrder =  count($totalOrder);
         $counttotalOrderSuccess =  count($totalOrderSuccess);
         $counttotalOrderFail =  count($totalOrderFail);

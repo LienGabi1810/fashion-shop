@@ -49,6 +49,17 @@
                 <h4 class="alert-heading">{{session('thongbao')}}</h4>
                 </div>
             @endif
+            <div class="col-md-2">
+                <p>
+                    Lọc theo:
+                    <select class="dashboard-filter form-control" id="chart-onchange">
+                        <option><--Chọn--></option>
+                        <option value="today">Hôm nay</option>
+                        <option value="month">Tháng này</option>
+                        <option value="year">Năm nay</option>
+                    </select>
+                </p>
+            </div>
             <div class="row">
                 @csrf
                 <div class="col-xl-12" style="margin-top: 20px;">
@@ -102,6 +113,30 @@
                }
            });  
        }
+
+       $("#chart-onchange").on('change',function(){
+           var value = $(this).val();
+           var _token = $('input[name="_token"]').val();
+           if(value == 'today'){
+                var url = "http://127.0.0.1:8000/admin/today"
+           } else if(value == 'month'){
+                var url = "http://127.0.0.1:8000/admin/month"
+           }
+           else if(value == 'year'){
+                var url = "http://127.0.0.1:8000/admin/year"
+           }
+           $.ajax({
+               url: url,
+               method: "POST",
+               dataType: "JSON",
+               data:{value:value,_token:_token},
+
+               success:function(data){
+                console.log(data);
+                donut.setData(data);
+               }
+           });     
+       });
 
 
    });
