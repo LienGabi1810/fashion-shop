@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginCustomerRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Customer;
 use Illuminate\Auth\SessionGuard;
+use Cart;
 
 class CustomerLoginController extends Controller
 {
@@ -16,7 +18,7 @@ class CustomerLoginController extends Controller
         return view('frontend.login');
     }
 
-    public function postLogin(LoginRequest $r){
+    public function postLogin(LoginCustomerRequest $r){
         $login = [
             'username' => $r->username,
             'password' => $r->password
@@ -49,6 +51,7 @@ class CustomerLoginController extends Controller
     public function getCustomerLogout(){
         //Auth::logout();
         Auth('customer')->logout();
+        Cart::Destroy();
         //auth()->logout
         return redirect()->intended('/');
     }

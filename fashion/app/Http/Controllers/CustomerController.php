@@ -14,7 +14,7 @@ class CustomerController extends Controller
     public function getIndex()
     {
         $emailCustomer = Auth::guard('customer')->user()->email;
-        $data['order'] = Order::where('email','like',$emailCustomer)->get();
+        $data['order'] = Order::where('email','like',$emailCustomer)->paginate(10);
         return view('frontend.customer.customer',$data);
     }
 

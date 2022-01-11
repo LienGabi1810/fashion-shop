@@ -10,6 +10,10 @@
             </ol>
             {{-- <a href="/admin/cart/add" style="margin-bottom: 20px" type="button" class="btn btn-primary">Lên đơn</a> --}}
             <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    DataTable Example
+                </div>
                 @csrf
                 <div class="card-body">
                     <table id="datatablesSimple">
@@ -72,9 +76,9 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{-- <div align='right'>
+                    <div align='right'>
                         {{$order->links("pagination::bootstrap-4")}}
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
