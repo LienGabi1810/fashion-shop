@@ -192,11 +192,12 @@ class AdminController extends Controller
         $year_n = Carbon::now()->format('Y');
         $month_n = Carbon::now()->format('d');
         
-        $totalOrder = Order::whereDate('created_at',$month_n)->get();
-        $totalOrderSuccess = Order::where('status_order','2')->whereDate('created_at',$month_n)->get();
-        $totalOrderFail = Order::where('status_order','3')->whereDate('created_at',$month_n)->get();
-        $totalOrderWaiting = Order::where('status_order','0')->whereDate('created_at',$month_n)->get();
-        $totalOrderShipping = Order::where('status_order','1')->whereDate('created_at',$month_n)->get();
+        $totalOrder = Order::whereDate('created_at', Carbon::today())->get();
+        
+        $totalOrderSuccess = Order::where('status_order','2')->whereDate('created_at', Carbon::today())->get();
+        $totalOrderFail = Order::where('status_order','3')->whereDate('created_at', Carbon::today())->get();
+        $totalOrderWaiting = Order::where('status_order','0')->whereDate('created_at', Carbon::today())->get();
+        $totalOrderShipping = Order::where('status_order','1')->whereDate('created_at', Carbon::today())->get();
         $countTotalOrder =  count($totalOrder);
         $counttotalOrderSuccess =  count($totalOrderSuccess);
         $counttotalOrderFail =  count($totalOrderFail);
